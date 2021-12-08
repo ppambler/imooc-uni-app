@@ -1,19 +1,62 @@
-/**index.wxss**/
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #aaa;
+.test-rpx1 {
+  background-color: orange;
+  font-size: 28px;
+  width: 1rpx;
+}
+.test-rpx50 {
+  /* background-color: orange; */
+  font-size: 28px;
+  width: 375rpx;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.scroll-view-parent {
+  width: 200px;
+  height: 200px;
+  background-color: tomato;
 }
 
-.usermotto {
-  margin-top: 200px;
+.scroll-view-child {
+  width: 200px;
+  height: 200px;
+}
+
+.scroll-view-child-01 {
+  background-color: wheat;
+}
+.scroll-view-child-02 {
+  background-color: yellowgreen;
+}
+.scroll-view-child-03 {
+  background-color: skyblue;
+}
+
+.scroll-view-x {
+  width: 200px;
+  height: 200px;
+  background-color: tomato;
+}
+
+.scroll-view-x-child {
+  width: 400px;
+  height: 100px;
+  background-color: yellow;
+}
+
+.swiper-item {
+  width: 200px;
+  height: 200px;
+}
+
+.swiper-item-a {
+  background-color: yellowgreen;
+}
+.swiper-item-b {
+  background-color: tomato;
+}
+.swiper-item-c {
+  background-color: yellow;
+}
+
+.list1 {
+  color: tomato;
 }

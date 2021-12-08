@@ -1,23 +1,44 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-      <open-data type="userNickName"></open-data>
-    </block>
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<!-- index.wxml
+<view class="test-rpx1">我是一个 view 标签</view>
+<view class="parent" hover-class="test-hover-class">
+  <view class="test-rpx50" hover-class="test-hover-class" hover-stop-propagation="true"	hover-start-time="2000" hover-stay-time="3000">我是一个 view 标签</view>
 </view>
+
+
+<scroll-view class="scroll-view-parent" scroll-y="true">
+  <view class="scroll-view-child scroll-view-child-01">a</view>
+  <view class="scroll-view-child scroll-view-child-02">b</view>
+  <view class="scroll-view-child scroll-view-child-03">c</view>
+</scroll-view>
+<view>.......</view>
+<scroll-view class="scroll-view-x" scroll-x="true">
+  <view class="scroll-view-x-child ">abcdefg</view>
+</scroll-view>
+
+<view>.......</view>
+
+<swiper indicator-dots="true" indicator-active-color="pink" autoplay>
+  <swiper-item class="swiper-item swiper-item-a">A</swiper-item>
+  <swiper-item class="swiper-item swiper-item-b">B</swiper-item>
+  <swiper-item class="swiper-item swiper-item-c">C</swiper-item>
+</swiper>
+
+<view>.......</view> -->
+
+<!-- <text>text1</text>
+<text>text2</text>
+<text>text3</text>
+
+<view>view1</view>
+<view>view2</view>
+<view>view13</view>
+
+<rich-text nodes="<ul><li class='list1'>list1</li><li>list2</li></ul>"></rich-text> -->
+
+<!-- <button>我是一个 button</button>
+<button type="primary">我是一个 button</button>
+<button type="primary" plain="true">我是一个 button</button> -->
+
+<image src="https://ppambler.github.io/article/avatar.jpg"></image>
+<image src="https://ppambler.github.io/article/avatar.jpg" mode="aspectFit"></image>
+<image src="https://ppambler.github.io/article/avatar.jpg" mode="aspectFill"></image>
