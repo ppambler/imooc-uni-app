@@ -8,3 +8,4 @@
 .test-hover-class {
   background-color: tomato;
 }
+@import 'app-wxa-auto-dark.wxss'

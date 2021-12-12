@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <title>01-回调地狱</title>
+  <style></style>
+</head>
+
+<body>
+  <script>
+    const isA = true
+    const isB = true
+    const isC = true
+    const isD = true
+
+    function A(cb) {
+      console.log('执行 A 接口的逻辑')
+      setTimeout(() => {
+        if (isA) {
+          cb('接口 A 执行完成')
+        } else {
+          cb('接口 A 执行失败')
+        }
+      }, 1 * 1000)
+    }
+    function B(cb) {
+      console.log('执行 B 接口的逻辑')
+      setTimeout(() => {
+        if (isB) {
+          cb('接口 B 执行完成')
+        } else {
+          cb('接口 B 执行失败')
+        }
+      }, 1 * 1000)
+    }
+    function C(cb) {
+      console.log('执行 C 接口的逻辑')
+      setTimeout(() => {
+        if (isC) {
+          cb('接口 C 执行完成')
+        } else {
+          cb('接口 C 执行失败')
+        }
+      }, 1 * 1000)
+    }
+    function D(cb) {
+      console.log('执行 D 接口的逻辑')
+      setTimeout(() => {
+        if (isD) {
+          cb('接口 D 执行完成')
+        } else {
+          cb('接口 D 执行失败')
+        }
+      }, 1 * 1000)
+    }
+    
+
+    // 回调地狱实现方案 
+    A(function (res) {
+      console.log(res)
+      B(function (res) {
+        console.log(res)
+        C(function (res) {
+          console.log(res)
+          D(function (res) {
+            console.log(res)
+          })
+        })
+      })
+    })
+
+  
+  
+  
+  
+  
+  </script>
+</body>
+
+</html>

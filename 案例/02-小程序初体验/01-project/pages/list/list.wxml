@@ -1,0 +1,6 @@
+<!--pages/list/list.wxml-->
+<view>
+  <button type="primary" bindtap="onGetClick">发起 get 请求</button>
+</view>
+<button type="primary" bindtap="onPostClick">发起 post 请求</button>
+<button type="primary" bindtap="onAsyncGetClick">发起请求，通过 async+await 简化操作</button>

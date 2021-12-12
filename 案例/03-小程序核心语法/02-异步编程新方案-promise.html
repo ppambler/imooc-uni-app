@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <title>02-异步编程新方案-Promise</title>
+  <style></style>
+</head>
+
+<body>
+  <script>
+    const isA = true
+    const isB = true
+    const isC = true
+    const isD = true
+
+    function A() {
+      // 1. 创建 Promise 实例
+      // 2. 构造函数中接收一个回调函数
+      // 3. resolve：是一个回调函数，表示 Promise 执行成功
+      // 4. reject：是一个回调函数，表示 Promise 执行失败
+      return new Promise((resolve, reject) => {
+        // 5. 当前处于 【待定（pending）】 状态下，代码会立刻执行
+        console.log('执行 A 接口的逻辑')
+        setTimeout(() => {
+          if (isA) {
+            // 6. 执行成功 -> 进入 【已兑现（fulfilled）】 状态下
+            resolve('接口 A 执行完成')
+          } else {
+            // 7. 执行失败 -> 进入 【已拒绝（rejected）】 状态下
+            reject('接口 A 执行失败')
+          }
+        }, 1000)
+      })
+    }
+    function B() {
+      return new Promise((resolve, reject) => {
+        console.log('执行 B 接口的逻辑')
+        setTimeout(() => {
+          if (isB) {
+            resolve('接口 B 执行完成')
+          } else {
+            reject('接口 B 执行失败')
+          }
+        }, 1000)
+      })
+    }
+    function C() {
+      return new Promise((resolve, reject) => {
+        console.log('执行 C 接口的逻辑')
+        setTimeout(() => {
+          if (isC) {
+            resolve('接口 C 执行完成')
+          } else {
+            reject('接口 C 执行失败')
+          }
+        }, 1000)
+      })
+    }
+    function D() {
+      return new Promise((resolve, reject) => {
+        console.log('执行 D 接口的逻辑')
+        setTimeout(() => {
+          if (isD) {
+            resolve('接口 D 执行完成')
+          } else {
+            reject('接口 D 执行失败')
+          }
+        }, 1000)
+      })
+    }
+
+    // 使用 Promise 的实例
+    // .then：接收「已兑现（fulfilled）」的结果
+    // .catch：接收「已拒绝（rejected）」的结果
+    // 在 .then 中，可以继续 return 一个 Promise 的实例，
+    // 这个 return 的实例，可以在下一次的 .then 中接收结果
+    // const promiseA = A()
+    // const promiseB = promiseA.then(res => {
+    //   console.log(res)
+    //   return B()
+    // })
+    // promiseB.then(res => {
+    //   console.log(res)
+    // })
+
+    // Promise 实现方案
+    A()
+    .then(res => {
+      console.log(res)
+      return B()
+    })
+    .then(res => {
+      console.log(res)
+      return C()
+    })
+    .then(res => {
+      console.log(res)
+      return D()
+    })
+    .then(res => {
+      console.log(res)
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+/* 
+此文件为开发者工具生成，生成时间: 2021/12/11 下午11:33:07
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .test-rpx1 {
+        background-color: rgb(117, 49, 0);
+    }
+
+    .scroll-view-parent {
+        background-color: rgb(189, 35, 23);
+    }
+
+    .scroll-view-child-01 {
+        background-color: rgb(50, 36, 0);
+    }
+
+    .scroll-view-child-02 {
+        background-color: rgb(24, 78, 0);
+    }
+
+    .scroll-view-child-03 {
+        background-color: rgb(0, 70, 95);
+    }
+
+    .scroll-view-x {
+        background-color: rgb(189, 35, 23);
+    }
+
+    .scroll-view-x-child {
+        background-color: rgb(39, 26, 0);
+    }
+
+    .swiper-item-a {
+        background-color: rgb(24, 78, 0);
+    }
+
+    .swiper-item-b {
+        background-color: rgb(189, 35, 23);
+    }
+
+    .swiper-item-c {
+        background-color: rgb(39, 26, 0);
+    }
+
+    .list1 {
+        color: rgb(189, 35, 23);
+    }
+
+    .num-input {
+        border: rgb(0, 0, 0);
+    }
+}

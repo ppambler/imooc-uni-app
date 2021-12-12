@@ -39,6 +39,57 @@
 <button type="primary">我是一个 button</button>
 <button type="primary" plain="true">我是一个 button</button> -->
 
-<image src="https://ppambler.github.io/article/avatar.jpg"></image>
+<!-- <image src="https://ppambler.github.io/article/avatar.jpg"></image>
 <image src="https://ppambler.github.io/article/avatar.jpg" mode="aspectFit"></image>
-<image src="https://ppambler.github.io/article/avatar.jpg" mode="aspectFill"></image>
+<image src="https://ppambler.github.io/article/avatar.jpg" mode="aspectFill"></image> -->
+
+<view>
+  <view>
+    <!-- wxml 中访问数据，必须使用 {{}} 语法，{{}} 语法中可以放置【任意的、单一的 JavaScript 表达式】 -->
+    商品的单价：{{product.price}}
+  </view>
+  <view>
+    商品的数量：{{product.num}}
+  </view>
+  <view>
+    商品的总价格：{{product.price * product.num}}
+  </view>
+  <button type="primary" bindtap="onAddNum">num + 1</button>
+  <button type="primary" bindtap="onAddNumN" data-step="5">num + N</button>
+  <view>
+    商品的数量：
+    <input class="num-input" type="number" value="{{ product.num }}" bindinput="onInput" />
+  </view>
+  <!-- wx:if ... wx:elif ... wx:else：判断结果为 true 则进行渲染，否则不进行渲染 -->
+  <view>
+    售货员小姐姐惊呼：
+    <text wx:if="{{ product.price * product.num <= 100 }}">hello 帅哥</text>
+    <text wx:elif="{{ product.price * product.num > 100 && product.price * product.num < 1000 }}">哇哦 有钱人哦</text>
+    <text wx:else>土豪你好</text>
+  </view>
+  <!-- hidden：结果为 true 则隐藏，否则不隐藏 -->
+  <view>
+    售货员小姐姐惊呼：
+    <text hidden="{{ !(product.price * product.num <= 100) }}">hello 帅哥</text>
+    <text hidden="{{ !(product.price * product.num > 100 && product.price * product.num < 1000) }}">哇哦 有钱人哦</text>
+    <text hidden="{{product.price * product.num < 1000}}">土豪你好</text>
+  </view>
+  <!-- 
+    利用 wx:for 循环渲染商品
+    默认数组的当前项的下标变量名默认为 index，
+    数组当前项的变量名默认为 item
+   -->
+   <!-- wx:for 它必须要配置 wx:key 进行使用，因为 wx:key 可以提高 for 循环的性能 -->
+   <!-- 对应的 key 值必须是一个不可以重复的值 -->
+   <!-- 注意：使用 index 作为 wx:key 的表达式是不需要使用 {{}} 语法的，
+   因为 {{}} 里边放到的是对应 js 文件里边的数据，而 index 显然不是-->
+  <view class="product-box">
+    <block wx:for="{{ products }}" wx:key="index">
+      <view class="product-item">
+        <text>索引：{{index}} -> </text>
+        <text>商品名：{{item.name}} -> </text>
+        <text>价格：{{item.price}}</text>
+      </view>
+    </block>
+  </view>
+</view>

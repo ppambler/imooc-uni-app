@@ -60,3 +60,11 @@
 .list1 {
   color: tomato;
 }
+
+.num-input {
+  margin: 6px 18px;
+  padding: 4px 10px;
+  border: 1px solid #cccccc;
+}
+
+@import 'index-wxa-auto-dark.wxss'
