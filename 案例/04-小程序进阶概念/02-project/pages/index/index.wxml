@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view>
+  <tabs bind:change="onTabChange"></tabs>
+  <list tabId="{{tabSelectId}}"></list>
+</view>
+
+

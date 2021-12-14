@@ -1,0 +1,9 @@
+<scroll-view>
+  <view 
+    wx:for="{{ listData }}" 
+    wx:key="index" 
+    class="list-item">
+    {{ item.title }}
+  </view>
+</scroll-view>
+
