@@ -1,7 +1,10 @@
 // components/list/list.js
 Component({
 
-
+  options: {
+    // 在当前组件中开启了多个插槽
+    multipleSlots: true
+  },
   /**
    * 组件的初始数据
    */

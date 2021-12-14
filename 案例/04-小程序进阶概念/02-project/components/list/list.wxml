@@ -1,3 +1,4 @@
+<slot name="header"></slot>
 <scroll-view>
   <view 
     wx:for="{{ listData }}" 
@@ -6,4 +7,5 @@
     {{ item.title }}
   </view>
 </scroll-view>
+<slot name="footer"></slot>
 

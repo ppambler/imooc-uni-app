@@ -1,0 +1,6 @@
+.list-slot {
+  text-align: center;
+  color: #ccc;
+  padding: 18px 0;
+}
+
