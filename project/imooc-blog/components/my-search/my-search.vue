@@ -9,7 +9,7 @@
         mode="aspectFit"
       />
       <!-- placeholder -->
-      <text class="placeholder">placeholder</text>
+      <text class="placeholder">{{ placeholderText }}</text>
     </view>
 		
 	</view>
