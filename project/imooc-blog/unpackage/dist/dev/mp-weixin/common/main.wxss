@@ -137,10 +137,10 @@
   background-color: #c7c7c7;
 }
 .uni-bg-color {
-  color: #f7f7f7;
+  color: #fff;
 }
 .uni-bg-color-bg {
-  background-color: #f7f7f7;
+  background-color: #fff;
 }
 .uni-border-1 {
   color: #F0F0F0;
