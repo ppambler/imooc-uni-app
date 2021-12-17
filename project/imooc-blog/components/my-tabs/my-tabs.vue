@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 16:34:28
+ * @LastEditTime: 2021-12-17 18:19:48
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -18,8 +18,8 @@
             <block v-for="(item, index) in tabData" :key="index">
               <view
                 class="tab-item"
-                :class="defaultIndex === index ? 'active' : ''"
-                @tap="$emit('btnTap', index)"
+                :class="{ 'tab-item-active': activeIndex === index }"
+                @click="onTabClick(index)"
                 >{{ item.label || item }}</view
               >
             </block>
@@ -58,7 +58,22 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      // 当前激活项的 index
+      activeIndex: -1,
+    };
+  },
+  watch: {
+    // 监听激活项的变化
+    defaultIndex: {
+      // 当 defaultIndex 发生变化时，回调的方法
+      handler(val) {
+        console.log("立即执行");
+        this.activeIndex = val;
+      },
+      // immediate：当前 handler 回调将会在侦听开始之后立即被调用
+      immediate: true,
+    },
   },
   created() {
     console.log(this.defaultIndex);
@@ -68,6 +83,14 @@ export default {
       console.log(this.tabData);
       console.log(this.defaultIndex);
     });
+  },
+  methods: {
+    // tab-item 的点击事件
+    onTabClick(index) {
+      this.activeIndex = index;
+      // 发送一个通知，通知表示激活项发生变化了
+      this.$emit("tabClick", index);
+    },
   },
 };
 </script>
@@ -102,6 +125,9 @@ export default {
             position: relative;
             text-align: center;
             color: $uni-text-color;
+            &-active {
+              color: $uni-text-color-hot;
+            }
           }
           .active {
             color: #f01414;
