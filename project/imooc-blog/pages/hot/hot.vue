@@ -1,3 +1,8 @@
+<!--
+ * @Date: 2021-12-16 17:16:13
+ * @LastEditTime: 2021-12-17 12:45:22
+ * @FilePath: \imooc-blog\pages\hot\hot.vue
+-->
 <template>
   <view class="hot-container">
     <!-- 微信小程序的 image 组件 -->
@@ -11,10 +16,29 @@
 </template>
 
 <script>
+import { getHotTabs } from '@/api/hot'
 export default {
   data() {
     return {};
   },
+  /**
+   * created: 组件实例配置完成，但 DOM 未渲染 -> 可在这儿发起网络请求，配置响应式数据
+   */
+  created() {
+    this.loadHotTabs()
+  },
+  /**
+   * 所有的方法必须被定义到 methods 中
+   */
+  methods: {
+    /**
+     * 获取 热搜文章类型
+     */
+    async loadHotTabs() {
+      const res = await getHotTabs()
+      console.log(res)
+    }
+  }
 };
 </script>
 
