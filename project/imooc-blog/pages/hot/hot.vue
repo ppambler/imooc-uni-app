@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-17 16:23:55
- * @FilePath: \imooc-blog\pages\hot\hot.vue
+ * @LastEditTime: 2021-12-17 23:41:01
+ * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
   <view class="hot-container">
@@ -17,6 +17,11 @@
       :tabData="tabData"
       :defaultIndex="currentIndex"
       @btnTap="selectedTab"
+      :config="{
+        textColor: '#00ff00',
+        activeTextColor: '#ff00ff',
+        underLineColor: '#ff00ff',
+      }"
     ></my-tabs>
   </view>
 </template>

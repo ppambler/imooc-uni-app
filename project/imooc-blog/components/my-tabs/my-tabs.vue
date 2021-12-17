@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 23:18:05
+ * @LastEditTime: 2021-12-17 23:37:31
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -22,6 +22,12 @@
                 class="tab-item"
                 :class="{ 'tab-item-active': activeIndex === index }"
                 @click="onTabClick(index)"
+                :style="{
+                  color:
+                    activeIndex === index
+                      ? defaultConfig.activeTextColor
+                      : defaultConfig.textColor,
+                }"
                 >{{ item.label || item }}</view
               >
             </block>
@@ -79,6 +85,10 @@ export default {
       },
       // 默认配置
       defaultConfig: {
+        // 默认的字体颜色
+        textColor: "#333333",
+        // 高亮字体颜色
+        activeTextColor: "#f94d2a",
         // 下划线宽度 px
         underLineWidth: 24,
         // 下划线高度 px
@@ -93,6 +103,13 @@ export default {
     };
   },
   watch: {
+    // 监听 config
+    config: {
+      handler(val) {
+        this.defaultConfig = { ...this.defaultConfig, ...val };
+      },
+      immediate: true,
+    },
     // 监听激活项的变化
     defaultIndex: {
       // 当 defaultIndex 发生变化时，回调的方法
