@@ -1,9 +1,10 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 13:59:26
+ * @LastEditTime: 2021-12-17 15:10:39
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
+  <!--  处理 my-tabs 的 html 结构-->
   <view class="tab-container">
     <view class="tab-box">
       <scroll-view
@@ -62,4 +63,40 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.tab-container {
+  font-size: $uni-font-size-base;
+  height: 45px;
+  line-height: 45px;
+  background-color: $uni-bg-color;
+  .tab-box {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    position: relative;
+    .scroll-view {
+      white-space: nowrap;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      .scroll-content {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .tab-item-box {
+          height: 100%;
+          .tab-item {
+            height: 100%;
+            display: inline-block;
+            padding: 0 15px;
+            position: relative;
+            text-align: center;
+            color: $uni-text-color;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
