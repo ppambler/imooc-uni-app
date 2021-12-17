@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 15:10:39
+ * @LastEditTime: 2021-12-17 16:34:28
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -16,7 +16,12 @@
         <view class="scroll-content">
           <view class="tab-item-box">
             <block v-for="(item, index) in tabData" :key="index">
-              <view class="tab-item">{{ item.label || item }}</view>
+              <view
+                class="tab-item"
+                :class="defaultIndex === index ? 'active' : ''"
+                @tap="$emit('btnTap', index)"
+                >{{ item.label || item }}</view
+              >
             </block>
           </view>
         </view>
@@ -55,9 +60,13 @@ export default {
   data() {
     return {};
   },
+  created() {
+    console.log(this.defaultIndex);
+  },
   mounted() {
     this.$nextTick(function () {
       console.log(this.tabData);
+      console.log(this.defaultIndex);
     });
   },
 };
@@ -93,6 +102,21 @@ export default {
             position: relative;
             text-align: center;
             color: $uni-text-color;
+          }
+          .active {
+            color: #f01414;
+          }
+          .active:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 4px;
+            border-radius: 4px;
+            transform: scaleY(0.5);
+            background-color: #f01414;
+            transition: all 0.3s;
           }
         }
       }

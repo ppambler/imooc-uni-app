@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-17 13:51:21
+ * @LastEditTime: 2021-12-17 16:23:55
  * @FilePath: \imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -13,26 +13,30 @@
       <my-search placeholderText="uni-app 自定义组件"></my-search>
     </view>
     <!-- tabs 组件 -->
-    <my-tabs :tabData="tabData" :defaultIndex="currentIndex"></my-tabs>
+    <my-tabs
+      :tabData="tabData"
+      :defaultIndex="currentIndex"
+      @btnTap="selectedTab"
+    ></my-tabs>
   </view>
 </template>
 
 <script>
-import { getHotTabs } from '@/api/hot'
+import { getHotTabs } from "@/api/hot";
 export default {
   data() {
     return {
       // tabs 数据源
       tabData: [],
       // 当前的切换 index
-      currentIndex: 0
+      currentIndex: 0,
     };
   },
   /**
    * created: 组件实例配置完成，但 DOM 未渲染 -> 可在这儿发起网络请求，配置响应式数据
    */
   created() {
-    this.loadHotTabs()
+    this.loadHotTabs();
   },
   /**
    * 所有的方法必须被定义到 methods 中
@@ -43,11 +47,15 @@ export default {
      */
     async loadHotTabs() {
       // uni-app 支持 async await
-      const res = await getHotTabs()
-      console.log(res)
-      this.tabData = res.data.list
-    }
-  }
+      const res = await getHotTabs();
+      console.log(res);
+      this.tabData = res.data.list;
+    },
+    selectedTab(index) {
+      console.log(index);
+      this.currentIndex = index;
+    },
+  },
 };
 </script>
 
