@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-17 12:45:22
+ * @LastEditTime: 2021-12-17 13:51:21
  * @FilePath: \imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -12,6 +12,8 @@
     <view class="search-box">
       <my-search placeholderText="uni-app 自定义组件"></my-search>
     </view>
+    <!-- tabs 组件 -->
+    <my-tabs :tabData="tabData" :defaultIndex="currentIndex"></my-tabs>
   </view>
 </template>
 
@@ -19,7 +21,12 @@
 import { getHotTabs } from '@/api/hot'
 export default {
   data() {
-    return {};
+    return {
+      // tabs 数据源
+      tabData: [],
+      // 当前的切换 index
+      currentIndex: 0
+    };
   },
   /**
    * created: 组件实例配置完成，但 DOM 未渲染 -> 可在这儿发起网络请求，配置响应式数据
@@ -35,8 +42,10 @@ export default {
      * 获取 热搜文章类型
      */
     async loadHotTabs() {
+      // uni-app 支持 async await
       const res = await getHotTabs()
       console.log(res)
+      this.tabData = res.data.list
     }
   }
 };
