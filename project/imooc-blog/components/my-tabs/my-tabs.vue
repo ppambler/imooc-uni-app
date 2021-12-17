@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 18:19:48
+ * @LastEditTime: 2021-12-17 18:58:39
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -24,6 +24,12 @@
               >
             </block>
           </view>
+          <view
+            class="underLine"
+            :style="{
+              transform: 'translateX(' + slider.left + 'px)',
+            }"
+          ></view>
         </view>
       </scroll-view>
     </view>
@@ -61,6 +67,11 @@ export default {
     return {
       // 当前激活项的 index
       activeIndex: -1,
+      // 滑块
+      slider: {
+        // 滑块距离左侧的距离
+        left: 0,
+      },
     };
   },
   watch: {
@@ -144,6 +155,15 @@ export default {
             background-color: #f01414;
             transition: all 0.3s;
           }
+        }
+        .underLine {
+          height: 2px;
+          width: 24px;
+          background-color: $uni-text-color-hot;
+          border-radius: 3px;
+          transition: 0.5s;
+          position: absolute;
+          bottom: 0;
         }
       }
     }
