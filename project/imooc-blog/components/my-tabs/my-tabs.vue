@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 22:38:18
+ * @LastEditTime: 2021-12-17 23:18:05
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -12,6 +12,7 @@
         scroll-x
         class="scroll-view"
         scroll-with-animation
+        :scroll-left="scrollLeft"
       >
         <view class="scroll-content">
           <view class="tab-item-box">
@@ -87,6 +88,8 @@ export default {
       },
       // 内部维护的数据对象，为每个 item 单独额外维护一个 slider 的滑块对象
       tabList: [],
+      // scrollView 的横向滚动条位置
+      scrollLeft: 0,
     };
   },
   watch: {
@@ -192,6 +195,8 @@ export default {
         // left = tabItem.left + (tabItem.width - slider.width) / 2
         left: this.tabList[this.activeIndex]._slider.left,
       };
+      // 控制 scrollView 进行横向的滚动
+      this.scrollLeft = this.activeIndex * this.defaultConfig.underLineWidth;
     },
   },
 };
