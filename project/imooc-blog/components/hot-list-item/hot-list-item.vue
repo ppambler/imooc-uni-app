@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-18 15:48:17
- * @LastEditTime: 2021-12-18 17:24:52
+ * @LastEditTime: 2021-12-18 19:20:53
  * @FilePath: \imooc-blog\components\hot-list-item\hot-list-item.vue
 -->
 <template>
@@ -45,4 +45,55 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.item-container {
+  padding-bottom: $uni-spacing-col-lg;
+  .item-box {
+    display: flex;
+    margin: 0 $uni-spacing-row-base;
+    padding: $uni-spacing-col-lg $uni-spacing-row-base;
+    background-color: $uni-bg-color;
+    border-radius: $uni-border-radius-lg;
+    box-shadow: 2px 2px 5px 1px rgba(143, 143, 143, 0.1);
+    .item-box-left {
+      margin-right: $uni-spacing-row-sm;
+    }
+    .item-box-right {
+      width: 100%;
+      .item-title {
+        font-size: $uni-font-size-lg;
+        font-weight: bold;
+        color: $uni-text-color-title;
+      }
+      .item-desc {
+        padding-top: $uni-spacing-row-sm;
+        font-size: $uni-font-size-base;
+        color: $uni-text-color;
+      }
+      .item-bottom-box {
+        margin-top: $uni-spacing-col-sm;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .item-author {
+          font-size: $uni-font-size-sm;
+          color: $uni-text-color-grey;
+        }
+        .hot-box {
+          .hot-icon {
+            width: $uni-img-size-sm;
+            height: $uni-img-size-sm;
+            vertical-align: bottom;
+          }
+          .hot-text {
+            margin-left: $uni-spacing-row-sm;
+            font-size: $uni-font-size-sm;
+            color: $uni-text-color-hot;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
