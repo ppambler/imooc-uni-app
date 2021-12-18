@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-17 23:41:01
+ * @LastEditTime: 2021-12-18 17:23:30
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -17,12 +17,12 @@
       :tabData="tabData"
       :defaultIndex="currentIndex"
       @btnTap="selectedTab"
-      :config="{
-        textColor: '#00ff00',
-        activeTextColor: '#ff00ff',
-        underLineColor: '#ff00ff',
-      }"
     ></my-tabs>
+
+    <!-- list 视图 -->
+    <view>
+      <hot-list-item v-for="(item, index) in 50" :key="index"></hot-list-item>
+    </view>
   </view>
 </template>
 
