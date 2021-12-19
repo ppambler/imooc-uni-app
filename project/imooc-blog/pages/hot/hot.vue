@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-19 15:13:39
+ * @LastEditTime: 2021-12-19 17:49:18
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -19,20 +19,29 @@
       @tabClick="onTabClick"
     ></my-tabs>
 
-    <!-- list 视图 -->
-    <view>
-      <!-- 加载动画 -->
-      <uni-load-more status="loading" v-if="isLoading"></uni-load-more>
-      <!-- 列表 -->
-      <block v-else>
-        <hot-list-item
-          v-for="(item, index) in listData[currentIndex]"
-          :key="index"
-          :data="item"
-          :ranking="index + 1"
-        ></hot-list-item>
-      </block>
-    </view>
+    <!-- 基于 swiper 的 list 列表 -->
+    <swiper class="swiper" :current="currentIndex">
+      <swiper-item
+        class="swiper-item"
+        v-for="(tabItem, tabIndex) in tabData"
+        :key="tabIndex"
+      >
+        <view>
+          <!-- 加载动画 -->
+          <uni-load-more status="loading" v-if="isLoading"></uni-load-more>
+          <!-- 列表 -->
+          <block v-else>
+            <!-- 列表循环数据更改为 listData[tabIndex] -->
+            <hot-list-item
+              v-for="(item, index) in listData[tabIndex]"
+              :key="index"
+              :data="item"
+              :ranking="index + 1"
+            ></hot-list-item>
+          </block>
+        </view>
+      </swiper-item>
+    </swiper>
   </view>
 </template>
 
