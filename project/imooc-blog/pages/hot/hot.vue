@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-19 17:49:18
+ * @LastEditTime: 2021-12-19 19:25:26
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -20,7 +20,11 @@
     ></my-tabs>
 
     <!-- 基于 swiper 的 list 列表 -->
-    <swiper class="swiper" :current="currentIndex">
+    <swiper
+      class="swiper"
+      :current="currentIndex"
+      :style="{ height: currentSwiperHeight + 'px' }"
+    >
       <swiper-item
         class="swiper-item"
         v-for="(tabItem, tabIndex) in tabData"
@@ -33,6 +37,7 @@
           <block v-else>
             <!-- 列表循环数据更改为 listData[tabIndex] -->
             <hot-list-item
+              :class="'hot-list-item-' + tabIndex"
               v-for="(item, index) in listData[tabIndex]"
               :key="index"
               :data="item"
@@ -58,6 +63,10 @@ export default {
       isLoading: true,
       // 以 index 为 key -> 以对应的 list 为 value
       listData: {},
+      // 当前 swiper 的高度
+      currentSwiperHeight: 0,
+      // 以 index 为 key，对应的 swiper 的高度 为 val
+      swiperHeightData: {},
     };
   },
   /**
@@ -100,6 +109,14 @@ export default {
         const { data: res } = await getHotListFromTabType(id);
         this.listData[this.currentIndex] = res.list;
         this.isLoading = false;
+        // 渲染完列表数据之后，计算高度
+        // 指定 0 是刚好有个回调队列 -> 渲染队列的优先级更高
+        setTimeout(async () => {
+          // 获取当前 swiper 的高度
+          this.currentSwiperHeight = await this.getCurrentSwiperHeight();
+          // 放入缓存
+          this.swiperHeightData[this.currentIndex] = this.currentSwiperHeight;
+        }, 0);
       }
     },
     /**
@@ -110,6 +127,29 @@ export default {
     onTabClick(index) {
       this.currentIndex = index;
       this.loadHotListFromTab();
+    },
+    /**
+     * 计算当前 swiper 的高度
+     */
+    getCurrentSwiperHeight() {
+      return new Promise((resolve, reject) => {
+        // 累加和
+        let sum = 0;
+        // 1. 拿到所有的 item -> 异步操作 -> 类比 setTimeout(()=>{})
+        const query = uni.createSelectorQuery().in(this);
+        query
+          .selectAll(`.hot-list-item-${this.currentIndex}`)
+          .boundingClientRect((res) => {
+            // res 就是那 20 个列表节点的信息
+            // 2. 拿到所有 item 的高度
+            // 3. 把所有 item 的高度累加起来
+            res.forEach((item) => {
+              sum += item.height;
+            });
+            resolve(sum);
+          })
+          .exec();
+      });
     },
   },
 };
