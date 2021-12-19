@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-17 23:37:31
+ * @LastEditTime: 2021-12-19 13:03:12
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -114,7 +114,7 @@ export default {
     defaultIndex: {
       // 当 defaultIndex 发生变化时，回调的方法
       handler(val) {
-        console.log("defaultIndex 的 handler 立即执行");
+        // console.log("defaultIndex 的 handler 立即执行");
         this.activeIndex = val;
       },
       // immediate：当前 handler 回调将会在侦听开始之后立即被调用
@@ -124,7 +124,7 @@ export default {
     tabData: {
       // 当 tabData 发生变化时，回调的方法
       handler(val) {
-        console.log("tabData 的 handler 执行几次", val);
+        // console.log("tabData 的 handler 执行几次", val);
         this.tabList = val;
         // tabList 数据就已经和 tabData 同步了
         // 维护 tabList 中的每个 item -> 在 DOM 渲染完成之后
@@ -140,7 +140,7 @@ export default {
     },
   },
   created() {
-    console.log(this.defaultIndex);
+    // console.log(this.defaultIndex);
   },
   mounted() {
     // this.$nextTick(function () {
@@ -151,7 +151,7 @@ export default {
   methods: {
     // tab-item 的点击事件
     onTabClick(index) {
-      console.log("click tab item");
+      // console.log("click tab item");
       this.activeIndex = index;
       this.tabToIndex();
       // 发送一个通知，通知表示激活项发生变化了
@@ -161,7 +161,7 @@ export default {
      * 更新 tabItem 的宽度
      */
     updateTabWidth() {
-      console.log("updateTabWidth");
+      // console.log("updateTabWidth");
       /**
        * 为 tabList 的每一个 item 单独额外维护一个 slider 的滑块对象
        */
@@ -198,9 +198,9 @@ export default {
      * 根据当前的 activeIndex，计算 滑块的滚动位置
      */
     tabToIndex() {
-      console.log("tabList 为空");
+      // console.log("tabList 为空");
       if (this.tabList.length === 0) return;
-      console.log("tabToIndex 不为空");
+      // console.log("tabToIndex 不为空");
       // 获取到当前的 activeIndex
       const index = this.activeIndex;
       // 滑块的宽度

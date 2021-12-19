@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-18 17:23:30
+ * @LastEditTime: 2021-12-19 13:23:48
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -16,18 +16,23 @@
     <my-tabs
       :tabData="tabData"
       :defaultIndex="currentIndex"
-      @btnTap="selectedTab"
+      @tabClick="onTabClick"
     ></my-tabs>
 
     <!-- list 视图 -->
     <view>
-      <hot-list-item v-for="(item, index) in 50" :key="index"></hot-list-item>
+      <!-- 加载动画 -->
+      <uni-load-more status="loading" v-if="isLoading"></uni-load-more>
+      <!-- 列表 -->
+      <block v-else>
+        <hot-list-item v-for="(item, index) in 50" :key="index"></hot-list-item>
+      </block>
     </view>
   </view>
 </template>
 
 <script>
-import { getHotTabs } from "@/api/hot";
+import { getHotTabs, getHotListFromTabType } from "@/api/hot";
 export default {
   data() {
     return {
@@ -35,6 +40,10 @@ export default {
       tabData: [],
       // 当前的切换 index
       currentIndex: 0,
+      // list 列表数据加载的 loading
+      isLoading: true,
+      // 以 index 为 key -> 以对应的 list 为 value
+      listData: {},
     };
   },
   /**
@@ -55,10 +64,38 @@ export default {
       const res = await getHotTabs();
       console.log(res);
       this.tabData = res.data.list;
+      // 获取 list 数据时，需要 tab 中对应的 id
+      this.loadHotListFromTab();
     },
-    selectedTab(index) {
-      console.log(index);
+    /**
+     * @description: 获取 List 列表数据，只是单个 tab 的数据
+     * @param {*}
+     * @return {*}
+     */
+    async loadHotListFromTab() {
+      // 一、没有获取到数据
+      // 1. 展示 loading
+      // 2. 调用接口获取数据
+      // 3. 把数据保存到本地
+      // 4. 隐藏 loading
+      // 二、已经获取到数据（有了缓存之后）
+      // 1. 直接渲染数据即可
+      if (!this.listData[this.currentIndex]) {
+        this.isLoading = true;
+        const id = this.tabData[this.currentIndex].id;
+        const { data: res } = await getHotListFromTabType(id);
+        this.listData[this.currentIndex] = res.list;
+        this.isLoading = false;
+      }
+    },
+    /**
+     * @description: tab 点击事件
+     * @param {*}
+     * @return {*}
+     */
+    onTabClick(index) {
       this.currentIndex = index;
+      this.loadHotListFromTab();
     },
   },
 };
