@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-18 15:48:17
- * @LastEditTime: 2021-12-18 19:20:53
+ * @LastEditTime: 2021-12-19 15:48:25
  * @FilePath: \imooc-blog\components\hot-list-item\hot-list-item.vue
 -->
 <template>
@@ -9,17 +9,17 @@
       <!-- 左侧 -->
       <view class="item-box-left">
         <!-- 排名 -->
-        <hot-ranking></hot-ranking>
+        <hot-ranking :ranking="ranking"></hot-ranking>
       </view>
       <!-- 右侧 -->
       <view class="item-box-right">
         <!-- 标题 -->
-        <view class="item-title">标题</view>
+        <view class="item-title line-clamp-2">{{ data.title }}</view>
         <!-- 简介 -->
-        <view class="item-desc">简介</view>
+        <view class="item-desc line-clamp-2">{{ data.desc }}</view>
         <view class="item-bottom-box">
           <!-- 作者 -->
-          <text class="item-author">作者</text>
+          <text class="item-author">{{ data.nickname }}</text>
           <!-- 热度 -->
           <view class="hot-box">
             <!-- 小图标 -->
@@ -28,7 +28,7 @@
               src="@/static/images/hot-icon.png"
               mode="aspectFit"
             ></image>
-            <text class="hot-text">1000 热度</text>
+            <text class="hot-text">{{ data.views }} 热度</text>
           </view>
         </view>
       </view>
@@ -39,6 +39,16 @@
 <script>
 export default {
   name: "hot-list-item",
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+    ranking: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {};
   },

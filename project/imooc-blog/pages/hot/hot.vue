@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-19 13:23:48
+ * @LastEditTime: 2021-12-19 15:13:39
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -25,7 +25,12 @@
       <uni-load-more status="loading" v-if="isLoading"></uni-load-more>
       <!-- 列表 -->
       <block v-else>
-        <hot-list-item v-for="(item, index) in 50" :key="index"></hot-list-item>
+        <hot-list-item
+          v-for="(item, index) in listData[currentIndex]"
+          :key="index"
+          :data="item"
+          :ranking="index + 1"
+        ></hot-list-item>
       </block>
     </view>
   </view>
