@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-18 15:48:17
- * @LastEditTime: 2021-12-19 15:48:25
+ * @LastEditTime: 2021-12-20 22:53:01
  * @FilePath: \imooc-blog\components\hot-list-item\hot-list-item.vue
 -->
 <template>
@@ -28,7 +28,7 @@
               src="@/static/images/hot-icon.png"
               mode="aspectFit"
             ></image>
-            <text class="hot-text">{{ data.views }} 热度</text>
+            <text class="hot-text">{{ data.views | hotNumber }} 热度</text>
           </view>
         </view>
       </view>

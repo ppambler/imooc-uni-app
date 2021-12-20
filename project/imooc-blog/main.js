@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-15 18:57:48
- * @LastEditTime: 2021-12-19 15:15:56
+ * @LastEditTime: 2021-12-20 22:50:56
  * @FilePath: \imooc-blog\main.js
  */
 // #ifndef VUE3
@@ -9,6 +9,14 @@ import App from "./App";
 
 // 通用样式
 import "./styles/global.scss";
+
+// 注册过滤器的最佳实践
+import * as filters from "./filters";
+// console.log(filters); // { hotNumber: ƒ hotNumber(val) }
+// console.log(Object.keys(filters)); // ["hotNumber"]
+Object.keys(filters).forEach((key) => {
+  Vue.filter(key, filters[key]);
+});
 
 Vue.config.productionTip = false;
 
