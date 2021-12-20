@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-19 19:25:26
+ * @LastEditTime: 2021-12-20 11:43:18
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -24,6 +24,7 @@
       class="swiper"
       :current="currentIndex"
       :style="{ height: currentSwiperHeight + 'px' }"
+      @animationfinish="onSwiperEnd"
     >
       <swiper-item
         class="swiper-item"
@@ -103,21 +104,19 @@ export default {
       // 4. 隐藏 loading
       // 二、已经获取到数据（有了缓存之后）
       // 1. 直接渲染数据即可
-      if (!this.listData[this.currentIndex]) {
-        this.isLoading = true;
-        const id = this.tabData[this.currentIndex].id;
-        const { data: res } = await getHotListFromTabType(id);
-        this.listData[this.currentIndex] = res.list;
-        this.isLoading = false;
-        // 渲染完列表数据之后，计算高度
-        // 指定 0 是刚好有个回调队列 -> 渲染队列的优先级更高
-        setTimeout(async () => {
-          // 获取当前 swiper 的高度
-          this.currentSwiperHeight = await this.getCurrentSwiperHeight();
-          // 放入缓存
-          this.swiperHeightData[this.currentIndex] = this.currentSwiperHeight;
-        }, 0);
-      }
+      this.isLoading = true;
+      const id = this.tabData[this.currentIndex].id;
+      const { data: res } = await getHotListFromTabType(id);
+      this.listData[this.currentIndex] = res.list;
+      this.isLoading = false;
+      // 渲染完列表数据之后，计算高度
+      // 指定 0 是刚好有个回调队列 -> 渲染队列的优先级更高
+      setTimeout(async () => {
+        // 获取当前 swiper 的高度
+        this.currentSwiperHeight = await this.getCurrentSwiperHeight();
+        // 放入缓存
+        this.swiperHeightData[this.currentIndex] = this.currentSwiperHeight;
+      }, 0);
     },
     /**
      * @description: tab 点击事件
@@ -126,7 +125,20 @@ export default {
      */
     onTabClick(index) {
       this.currentIndex = index;
-      this.loadHotListFromTab();
+      // this.loadHotListFromTab();
+    },
+    /**
+     * 解决卡顿问题；等待 swiper 动画完成之后，获取数据
+     */
+    onSwiperEnd(e) {
+      console.log(e);
+      // 判断缓存是否有数据，不存在则重新获取数据
+      if (!this.listData[this.currentIndex]) {
+        this.loadHotListFromTab();
+        return;
+      }
+      // 未 return ，则证明存在缓存数据，即同时存在 height 的缓存数据
+      this.currentSwiperHeight = this.swiperHeightData[this.currentIndex];
     },
     /**
      * 计算当前 swiper 的高度
