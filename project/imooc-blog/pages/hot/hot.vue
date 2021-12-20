@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-20 19:41:25
+ * @LastEditTime: 2021-12-20 22:36:50
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -96,7 +96,6 @@ export default {
     async loadHotTabs() {
       // uni-app 支持 async await
       const res = await getHotTabs();
-      console.log(res);
       this.tabData = res.data.list;
       // 获取 list 数据时，需要 tab 中对应的 id
       this.loadHotListFromTab();
@@ -141,7 +140,7 @@ export default {
      * 解决卡顿问题；等待 swiper 动画完成之后，获取数据
      */
     onSwiperEnd(e) {
-      console.log(e);
+      // console.log(e);
       // 判断缓存是否有数据，不存在则重新获取数据
       if (!this.listData[this.currentIndex]) {
         this.loadHotListFromTab();
@@ -175,10 +174,13 @@ export default {
     },
     // 监听 swiper 的切换事件
     onSwiperChange(e) {
-      if (this.currentPageScrollTop > 130) {
-        // 控制列表的滚动位置
-        uni.pageScrollTo({ scrollTop: 130 });
-      }
+      setTimeout(() => {
+        if (this.currentPageScrollTop > 130) {
+          // 控制列表的滚动位置
+          uni.pageScrollTo({ scrollTop: 130, duration: 0 });
+        }
+      }, 300);
+
       this.currentIndex = e.detail.current;
     },
   },
@@ -202,5 +204,6 @@ export default {
     z-index: 99;
     top: 0;
   }
+  /* scroll-behavior: smooth; */
 }
 </style>
