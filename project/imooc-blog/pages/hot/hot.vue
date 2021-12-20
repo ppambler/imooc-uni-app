@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-20 16:50:32
+ * @LastEditTime: 2021-12-20 19:41:25
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -71,6 +71,8 @@ export default {
       currentSwiperHeight: 0,
       // 以 index 为 key，对应的 swiper 的高度 为 val
       swiperHeightData: {},
+      // 当前的滚动距离
+      currentPageScrollTop: 0,
     };
   },
   /**
@@ -78,6 +80,11 @@ export default {
    */
   created() {
     this.loadHotTabs();
+  },
+  onPageScroll(res) {
+    // 监听页面的滚动
+    // console.log(res);
+    this.currentPageScrollTop = res.scrollTop;
   },
   /**
    * 所有的方法必须被定义到 methods 中
@@ -168,6 +175,10 @@ export default {
     },
     // 监听 swiper 的切换事件
     onSwiperChange(e) {
+      if (this.currentPageScrollTop > 130) {
+        // 控制列表的滚动位置
+        uni.pageScrollTo({ scrollTop: 130 });
+      }
       this.currentIndex = e.detail.current;
     },
   },
