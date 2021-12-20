@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-20 16:10:34
+ * @LastEditTime: 2021-12-20 16:50:32
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -13,11 +13,13 @@
       <my-search placeholderText="uni-app 自定义组件"></my-search>
     </view>
     <!-- tabs 组件 -->
-    <my-tabs
-      :tabData="tabData"
-      :defaultIndex="currentIndex"
-      @tabClick="onTabClick"
-    ></my-tabs>
+    <view class="tab-sticky">
+      <my-tabs
+        :tabData="tabData"
+        :defaultIndex="currentIndex"
+        @tabClick="onTabClick"
+      ></my-tabs>
+    </view>
 
     <!-- 基于 swiper 的 list 列表 -->
     <swiper
@@ -182,6 +184,12 @@ export default {
   .search-box {
     padding: 0 16px;
     margin-bottom: $uni-spacing-col-base;
+  }
+  .tab-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 99;
+    top: 0;
   }
 }
 </style>
