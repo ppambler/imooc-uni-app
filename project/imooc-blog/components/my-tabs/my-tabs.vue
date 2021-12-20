@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-19 13:03:12
+ * @LastEditTime: 2021-12-20 16:23:26
  * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
@@ -116,6 +116,8 @@ export default {
       handler(val) {
         // console.log("defaultIndex 的 handler 立即执行");
         this.activeIndex = val;
+        // 定义滑块的位置
+        this.tabToIndex();
       },
       // immediate：当前 handler 回调将会在侦听开始之后立即被调用
       immediate: true,
