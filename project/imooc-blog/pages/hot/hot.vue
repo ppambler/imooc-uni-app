@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-20 11:43:18
+ * @LastEditTime: 2021-12-20 16:10:34
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -25,6 +25,7 @@
       :current="currentIndex"
       :style="{ height: currentSwiperHeight + 'px' }"
       @animationfinish="onSwiperEnd"
+      @change="onSwiperChange"
     >
       <swiper-item
         class="swiper-item"
@@ -162,6 +163,10 @@ export default {
           })
           .exec();
       });
+    },
+    // 监听 swiper 的切换事件
+    onSwiperChange(e) {
+      this.currentIndex = e.detail.current;
     },
   },
 };
