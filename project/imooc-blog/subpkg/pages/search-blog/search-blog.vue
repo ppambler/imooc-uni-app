@@ -1,13 +1,18 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-21 17:52:45
+ * @LastEditTime: 2021-12-21 18:55:57
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
   <view class="search-blog-container">
     <!-- search模块 -->
     <view class="search-bar-box">
-      <my-search />
+      <my-search
+        :isShowInput="true"
+        :config="{
+          backgroundColor: '#f1f0f3',
+        }"
+      />
     </view>
   </view>
 </template>
