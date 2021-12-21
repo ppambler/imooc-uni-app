@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-21 21:22:21
+ * @LastEditTime: 2021-12-21 21:55:31
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -20,6 +20,19 @@
         @clear="onSearchClear"
         @cancel="onSearchCancel"
       />
+    </view>
+    <!-- 热搜列表 -->
+    <view class="search-hot-list-box">
+      <!-- 列表 -->
+      <search-hot-list />
+    </view>
+    <!-- 搜索历史 -->
+    <view class="search-history-box">
+      <search-history />
+    </view>
+    <!-- 搜索结果 -->
+    <view class="search-result-box">
+      <search-result-list />
     </view>
   </view>
 </template>
