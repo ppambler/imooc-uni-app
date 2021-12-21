@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 19:17:50
- * @LastEditTime: 2021-12-21 19:03:49
+ * @LastEditTime: 2021-12-21 20:40:26
  * @FilePath: \imooc-blog\components\my-search\my-search.vue
 -->
 <template>
@@ -70,27 +70,51 @@ export default {
     /**
      * 点击搜索按钮触发
      */
-    onSearch() {},
+    onSearch() {
+      // console.log("onSearch");
+      this.$emit("search", this.value);
+    },
     /**
      * 输入框获取焦点触发
      */
-    onFocus() {},
+    onFocus() {
+      // console.log("onFocus");
+      this.$emit("focus", this.value);
+    },
     /**
      * 输入框失去焦点触发
      */
-    onBlur() {},
+    onBlur() {
+      // console.log("onBlur");
+      this.$emit("blur", this.value);
+    },
     /**
      * 点击输入框中的清空按钮时
      */
-    onClear() {},
+    onClear() {
+      // console.log("onClear");
+      this.$emit("clear", this.value);
+    },
     /**
      * 点击取消按钮时
      */
-    onCancel() {},
+    onCancel() {
+      // console.log("onCancel");
+      this.$emit("cancel", this.value);
+    },
     /**
      *  value 改变时触发事件
      */
-    onInput() {},
+    onInput(val) {
+      // console.log("onInput", val);
+      // input 的事件名称不可修改，与 props 中的 value 对应
+      // 当同时存在：
+      // props -> value
+      // $emit('input', val)
+      // 时，在组件外可以使用 v-model 完成双向数据绑定。
+      // 即：用户输入内容时，父组件传递过来的 value 同步发生变化
+      this.$emit("input", val);
+    },
   },
 };
 </script>
