@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-20 22:36:50
+ * @LastEditTime: 2021-12-21 17:51:07
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -9,7 +9,7 @@
     <!-- @ 符号相当于 当前项目的根目录 -->
     <image class="logo" src="@/static/images/logo.png" mode="aspectFit" />
     <!-- 不用注册，可直接使用组件 -->
-    <view class="search-box">
+    <view class="search-box" @click="onToSearch">
       <my-search placeholderText="uni-app 自定义组件"></my-search>
     </view>
     <!-- tabs 组件 -->
@@ -182,6 +182,16 @@ export default {
       }, 300);
 
       this.currentIndex = e.detail.current;
+    },
+    /**
+     * @description: 搜索框点击事件
+     * @param {*}
+     * @return {*}
+     */
+    onToSearch() {
+      uni.navigateTo({
+        url: "/subpkg/pages/search-blog/search-blog",
+      });
     },
   },
 };
