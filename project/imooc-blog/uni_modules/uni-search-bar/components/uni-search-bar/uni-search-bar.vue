@@ -1,4 +1,3 @@
-s
 <template>
   <view class="uni-searchbar">
     <view
