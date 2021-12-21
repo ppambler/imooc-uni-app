@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-21 20:44:59
+ * @LastEditTime: 2021-12-21 21:22:21
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { getDefaultText } from "@/api/search";
 export default {
   data() {
     return {
@@ -33,6 +34,9 @@ export default {
       // 默认的 placeholderText
       defaultText: "默认的 placeholderText",
     };
+  },
+  created() {
+    this.loadDefaultText();
   },
   methods: {
     /**
@@ -62,6 +66,13 @@ export default {
      */
     onSearchCancel(val) {
       console.log("searchbar 取消按钮");
+    },
+    /**
+     * 获取推荐搜索文本
+     */
+    async loadDefaultText() {
+      const { data: res } = await getDefaultText();
+      this.defaultText = res.defaultText;
     },
   },
 };
