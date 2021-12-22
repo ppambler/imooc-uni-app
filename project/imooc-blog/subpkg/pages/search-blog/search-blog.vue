@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-22 17:35:06
+ * @LastEditTime: 2021-12-22 18:00:12
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -24,7 +24,7 @@
     <!-- 热搜列表 -->
     <view class="search-hot-list-box card" v-if="showType === HOT_LIST">
       <!-- 列表 -->
-      <search-hot-list />
+      <search-hot-list @onSearch="onSearchConfirm" />
     </view>
     <!-- 搜索历史 -->
     <view class="search-history-box" v-else-if="showType === SEARCH_HISTORY">

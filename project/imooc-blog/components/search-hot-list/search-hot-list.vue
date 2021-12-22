@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:51:50
- * @LastEditTime: 2021-12-22 17:36:31
+ * @LastEditTime: 2021-12-22 17:59:27
  * @FilePath: \imooc-blog\components\search-hot-list\search-hot-list.vue
 -->
 <template>
@@ -8,7 +8,7 @@
     <!-- 标题 -->
     <view class="search-hot-title">慕课热搜 - 全网技术 一网打尽</view>
     <block v-for="(item, index) in hotList" :key="index">
-      <view class="search-hot-item">
+      <view class="search-hot-item" @click="onItemClick(item)">
         <!-- 序号 -->
         <hot-ranking :ranking="index + 1"></hot-ranking>
         <!-- 文本 -->
@@ -45,6 +45,12 @@ export default {
       const { data: res } = await getSearchHotList();
       this.hotList = res.list;
       console.log(this.hotList);
+    },
+    /**
+     * item 点击事件
+     */
+    onItemClick(item) {
+      this.$emit("onSearch", item.label);
     },
   },
 };
