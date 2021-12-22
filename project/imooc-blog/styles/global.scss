@@ -14,14 +14,11 @@
   word-break: break-all;
 }
 
+// 单行文本
 .line-clamp {
-  white-space: normal;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  word-break: break-all;
 }
 
 // 卡片视图
