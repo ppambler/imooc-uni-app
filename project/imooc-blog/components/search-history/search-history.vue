@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-22 20:01:08
+ * @LastEditTime: 2021-12-22 21:32:32
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
@@ -12,14 +12,17 @@
         <uni-icons type="trash" @click="isShowClear = true" />
       </view>
       <view v-else>
-        <text class="txt">全部删除</text>
+        <text class="txt" @click="onClearAll">全部删除</text>
         <text class="txt" @click="isShowClear = false">完成</text>
       </view>
     </view>
     <!-- 内容区域 -->
     <view class="search-history-box">
       <block v-for="(item, index) in searchData" :key="index">
-        <view class="search-history-item">
+        <view
+          class="search-history-item"
+          @click="onHistoryItemClick(item, index)"
+        >
           <text class="history-txt line-clamp">{{ item }}</text>
           <view class="history-clear-icon">
             <uni-icons v-show="isShowClear" type="clear" />
@@ -43,6 +46,32 @@ export default {
     return {
       isShowClear: false,
     };
+  },
+  methods: {
+    onClearAll() {
+      uni.showModal({
+        title: "提示",
+        content: "删除搜索历史记录？",
+        showCancel: true,
+        success: ({ confirm, cancel }) => {
+          if (confirm) {
+            // 删除 searchData
+            this.$emit("removeAllSearchData");
+            // console.log(1);
+            // 返回状态
+            this.isShowClear = false;
+          }
+        },
+      });
+    },
+    onHistoryItemClick(item, index) {
+      if (this.isShowClear) {
+        // 删除指定的 searchData
+        this.$emit("removeSearchData", index);
+      } else {
+        this.$emit("onItemClick", item);
+      }
+    },
   },
 };
 </script>

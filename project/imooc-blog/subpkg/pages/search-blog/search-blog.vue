@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-22 20:01:44
+ * @LastEditTime: 2021-12-22 21:32:37
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -28,7 +28,12 @@
     </view>
     <!-- 搜索历史 -->
     <view class="search-history-box" v-else-if="showType === SEARCH_HISTORY">
-      <search-history :searchData="searchData" />
+      <search-history
+        :searchData="searchData"
+        @removeAllSearchData="onRemoveAllSearchData"
+        @removeSearchData="onRemoveSearchData"
+        @onItemClick="onSearchConfirm"
+      />
     </view>
     <!-- 搜索结果 -->
     <view class="search-result-box" v-else>
@@ -94,6 +99,16 @@ export default {
       }
       // 2. 新的搜索内容需要先于旧的搜索内容展示
       this.searchData.unshift(this.searchVal);
+    },
+    /**
+     * 删除数据
+     */
+    onRemoveSearchData(index) {
+      this.searchData.splice(index, 1);
+    },
+    onRemoveAllSearchData() {
+      // console.log(2);
+      this.searchData = [];
     },
     // searchbar 获取焦点
     onSearchFocus(val) {
