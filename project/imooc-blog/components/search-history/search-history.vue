@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-22 18:55:55
+ * @LastEditTime: 2021-12-22 19:30:48
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
@@ -21,7 +21,9 @@
       <block v-for="(item, index) in searchData" :key="index">
         <view class="search-history-item">
           <text class="history-txt line-clamp">{{ item }}</text>
-          <uni-icons v-show="isShowClear" type="clear" />
+          <view class="history-clear-icon">
+            <uni-icons v-show="isShowClear" type="clear" />
+          </view>
         </view>
       </block>
     </view>
@@ -34,10 +36,61 @@ export default {
   data() {
     return {
       isShowClear: false,
+      // mock 数据
       searchData: ["sunday", "uniapp", "vue", "前端"],
     };
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.search-history-container {
+  padding: $uni-spacing-col-lg $uni-spacing-row-lg;
+  .search-history-title-box {
+    display: flex;
+    justify-content: space-between;
+
+    .search-history-title {
+      font-size: $uni-font-size-sm;
+      color: $uni-text-color;
+      padding: $uni-spacing-col-sm $uni-spacing-row-sm;
+    }
+    .txt {
+      color: $uni-text-color-grey;
+      font-size: $uni-font-size-sm;
+      padding: $uni-spacing-col-sm $uni-spacing-row-sm;
+    }
+  }
+  .search-history-box {
+    margin-top: $uni-spacing-col-lg;
+    .search-history-item {
+      width: 50%;
+      box-sizing: border-box;
+      display: inline-block;
+      padding: $uni-spacing-col-base $uni-spacing-row-base;
+      position: relative;
+      .history-txt {
+        width: 85%;
+        display: inline-block;
+        color: $uni-text-color;
+        font-size: $uni-font-size-base;
+      }
+      .history-clear-icon {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+      }
+    }
+    .search-history-item:nth-child(odd):before {
+      content: " ";
+      border-left: 1px solid #999;
+      display: inline-block;
+      height: 10px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0;
+    }
+  }
+}
+</style>
