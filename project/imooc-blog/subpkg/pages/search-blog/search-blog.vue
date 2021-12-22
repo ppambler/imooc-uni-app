@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-22 18:00:12
+ * @LastEditTime: 2021-12-22 20:01:44
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -28,7 +28,7 @@
     </view>
     <!-- 搜索历史 -->
     <view class="search-history-box" v-else-if="showType === SEARCH_HISTORY">
-      <search-history />
+      <search-history :searchData="searchData" />
     </view>
     <!-- 搜索结果 -->
     <view class="search-result-box" v-else>
@@ -59,6 +59,8 @@ export default {
       // 当 searchBar 获取焦点时 || 点击输入框清空按钮时，显示 【搜索历史】
       // 用户点击热搜列表 item || 用户点击搜索历史 || 用户按下搜索键，显示 【搜索结果】
       showType: HOT_LIST,
+      // 搜索历史数据
+      searchData: [],
     };
   },
   created() {
@@ -72,9 +74,26 @@ export default {
       console.log("搜索内容: " + this.searchVal);
       // 用户未输入文本，直接搜索时，使用【推荐搜索文本】
       this.searchVal = val ? val : this.defaultText;
+      // 保存搜索历史数据
+      this.saveSearchData();
+      // 切换视图
       if (this.searchVal) {
         this.showType = SEARCH_RESULT;
       }
+    },
+    /**
+     * 保存搜索历史数据
+     */
+    saveSearchData() {
+      // 1. 如果数据已存在，则删除
+      const index = this.searchData.findIndex(
+        (item) => item === this.searchVal
+      );
+      if (index !== -1) {
+        this.searchData.splice(index, 1);
+      }
+      // 2. 新的搜索内容需要先于旧的搜索内容展示
+      this.searchData.unshift(this.searchVal);
     },
     // searchbar 获取焦点
     onSearchFocus(val) {

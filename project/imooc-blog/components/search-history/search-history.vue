@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-22 19:30:48
+ * @LastEditTime: 2021-12-22 20:01:08
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
@@ -33,11 +33,15 @@
 <script>
 export default {
   name: "search-history",
+  props: {
+    searchData: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       isShowClear: false,
-      // mock 数据
-      searchData: ["sunday", "uniapp", "vue", "前端"],
     };
   },
 };
