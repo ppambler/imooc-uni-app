@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-23 20:12:12
+ * @LastEditTime: 2021-12-23 21:24:39
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
@@ -37,14 +37,15 @@
 
 <script>
 // 1. 导入 mapState 函数
-import { mapState } from "vuex";
+// 2. 导入 mapMutations 函数 -> 用来处理 mutation 的问题
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "search-history",
   props: {
-    searchData: {
-      type: Array,
-      required: true,
-    },
+    // searchData: {
+    //   type: Array,
+    //   required: true,
+    // },
   },
   data() {
     return {
@@ -54,9 +55,13 @@ export default {
   computed: {
     // 2. 在 computed 中，通过 mapState 函数，注册 state 中的数据，导入之后的数据可直接使用（就像使用 data 中的数据一样）
     // mapState(模块名, ['字段名','字段名','字段名'])
-    ...mapState("search", ["msg"]),
+    ...mapState("search", ["searchData"]),
   },
   methods: {
+    // 利用 mapMutations 函数，可以直接把 vuex 中 mutation 合并到当前组件的 methods 中
+    // 合并进来之后，使用 mutation 就像你使用 methods 中的方法一样
+    // mapMutations(模块名称, ['字段名'])
+    ...mapMutations("search", ["removeSearchData", "removeAllSearchData"]),
     onClearAll() {
       uni.showModal({
         title: "提示",
@@ -65,7 +70,7 @@ export default {
         success: ({ confirm, cancel }) => {
           if (confirm) {
             // 删除 searchData
-            this.$emit("removeAllSearchData");
+            this.removeAllSearchData();
             // console.log(1);
             // 返回状态
             this.isShowClear = false;
@@ -76,9 +81,9 @@ export default {
     onHistoryItemClick(item, index) {
       if (this.isShowClear) {
         // 删除指定的 searchData
-        this.$emit("removeSearchData", index);
+        this.removeSearchData(index);
       } else {
-        this.$emit("onItemClick", item);
+        this.$emit("onSearch", item);
       }
     },
   },
