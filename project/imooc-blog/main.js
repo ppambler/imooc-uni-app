@@ -1,11 +1,14 @@
 /*
  * @Date: 2021-12-15 18:57:48
- * @LastEditTime: 2021-12-20 22:50:56
+ * @LastEditTime: 2021-12-23 16:51:55
  * @FilePath: \imooc-blog\main.js
  */
 // #ifndef VUE3
 import Vue from "vue";
 import App from "./App";
+
+// 导入 vuex 实例
+import store from "@/store";
 
 // 通用样式
 import "./styles/global.scss";
@@ -24,6 +27,7 @@ App.mpType = "app";
 
 const app = new Vue({
   ...App,
+  store, // 挂载实例对象
 });
 app.$mount();
 // #endif
