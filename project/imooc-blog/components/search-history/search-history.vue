@@ -1,10 +1,12 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-22 21:32:32
+ * @LastEditTime: 2021-12-23 17:29:57
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
   <view class="search-history-container">
+    <!-- 3. 使用导入的 vuex 模块中的数据 -->
+    <div>{{ msg }}</div>
     <!-- title 区域 -->
     <view class="search-history-title-box">
       <view class="search-history-title">搜索历史</view>
@@ -34,6 +36,8 @@
 </template>
 
 <script>
+// 1. 导入 mapState 函数
+import { mapState } from "vuex";
 export default {
   name: "search-history",
   props: {
@@ -46,6 +50,11 @@ export default {
     return {
       isShowClear: false,
     };
+  },
+  computed: {
+    // 2. 在 computed 中，通过 mapState 函数，注册 state 中的数据，导入之后的数据可直接使用（就像使用 data 中的数据一样）
+    // mapState(模块名, ['字段名','字段名','字段名'])
+    ...mapState("search", ["msg"]),
   },
   methods: {
     onClearAll() {

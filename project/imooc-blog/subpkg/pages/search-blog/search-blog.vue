@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-22 21:32:37
+ * @LastEditTime: 2021-12-23 17:30:52
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -44,6 +44,7 @@
 
 <script>
 import { getDefaultText } from "@/api/search";
+
 // 0: 热搜列表 - 默认
 const HOT_LIST = "0";
 // 1：搜索历史
