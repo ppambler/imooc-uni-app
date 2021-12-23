@@ -1,12 +1,12 @@
 <!--
  * @Date: 2021-12-21 21:52:09
- * @LastEditTime: 2021-12-23 17:29:57
+ * @LastEditTime: 2021-12-23 20:12:12
  * @FilePath: \imooc-blog\components\search-history\search-history.vue
 -->
 <template>
   <view class="search-history-container">
     <!-- 3. 使用导入的 vuex 模块中的数据 -->
-    <div>{{ msg }}</div>
+    <!-- <div>{{ msg }}</div> -->
     <!-- title 区域 -->
     <view class="search-history-title-box">
       <view class="search-history-title">搜索历史</view>
