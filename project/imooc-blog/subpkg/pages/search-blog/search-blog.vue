@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-23 21:24:43
+ * @LastEditTime: 2021-12-24 19:43:22
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -32,7 +32,7 @@
     </view>
     <!-- 搜索结果 -->
     <view class="search-result-box" v-else>
-      <search-result-list />
+      <search-result-list :queryStr="searchVal" />
     </view>
   </view>
 </template>
