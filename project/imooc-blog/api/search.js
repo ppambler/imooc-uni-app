@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-21 21:21:21
- * @LastEditTime: 2021-12-22 17:01:08
+ * @LastEditTime: 2021-12-24 16:27:28
  * @FilePath: \imooc-blog\api\search.js
  */
 import request from "@/utils/request";
@@ -20,5 +20,15 @@ export function getDefaultText() {
 export function getSearchHotList() {
   return request({
     url: "/search/hot-list",
+  });
+}
+
+/**
+ * 搜索结果
+ */
+export function getSearchResult(data) {
+  return request({
+    url: "/search",
+    data,
   });
 }
