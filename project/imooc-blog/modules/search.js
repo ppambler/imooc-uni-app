@@ -1,8 +1,12 @@
 /*
  * @Date: 2021-12-23 17:13:08
- * @FilePath: \imooc-blog\modules\search.js
+ * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\modules\search.js
  */
 const STORAGE_KEY = "search-list";
+
+// 最大的缓存数量
+
+const HISTORY_MAX = 10;
 
 export default {
   // 独立命名空间
@@ -37,6 +41,15 @@ export default {
       }
       // 2. 新的搜索内容需要先于旧的搜索内容展示
       state.searchData.unshift(val);
+
+      // 处理缓存数量，如果 searchData 中的数据量超过了 HISTORY_MAX，那么就把最后面的数据给删除了
+      // 判断是否超过了最大缓存数量
+      if (state.searchData.length > HISTORY_MAX) {
+        state.searchData.splice(
+          HISTORY_MAX,
+          state.searchData.length - HISTORY_MAX
+        );
+      }
       // 调用 saveToStorage
       this.commit("search/saveToStorage");
     },
