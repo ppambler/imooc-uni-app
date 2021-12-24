@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-24 19:36:44
- * @LastEditTime: 2021-12-24 19:39:27
+ * @LastEditTime: 2021-12-24 20:27:44
  * @FilePath: \imooc-blog\components\search-result-item-theme-2\search-result-item-theme-2.vue
 -->
 <template>
@@ -17,7 +17,7 @@
           <view class="item-author">{{ data.nickname }}</view>
           <view class="item-read-num">
             <uni-icons class="read-num-icon" color="#999999" type="compose" />
-            <text>{{ data.updateTime }}</text>
+            <text>{{ data.updateTime | relativeTime }}</text>
           </view>
         </view>
       </view>
