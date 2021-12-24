@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 16:33:53
- * @LastEditTime: 2021-12-24 19:43:22
+ * @LastEditTime: 2021-12-24 22:43:30
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\search-blog\search-blog.vue
 -->
 <template>
@@ -32,7 +32,8 @@
     </view>
     <!-- 搜索结果 -->
     <view class="search-result-box" v-else>
-      <search-result-list :queryStr="searchVal" />
+      <!-- 1. 给 mescroll-body 的组件添加: ref="mescrollItem" (固定的,不可改,与 mescroll-comp.js 对应)-->
+      <search-result-list ref="mescrollItem" :queryStr="searchVal" />
     </view>
   </view>
 </template>
@@ -42,6 +43,9 @@ import { getDefaultText } from "@/api/search";
 // 导入 mapMutations 函数
 import { mapMutations } from "vuex";
 
+// 2. 引入mescroll-comp.js
+import MescrollCompMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js";
+
 // 0: 热搜列表 - 默认
 const HOT_LIST = "0";
 // 1：搜索历史
@@ -49,6 +53,9 @@ const SEARCH_HISTORY = "1";
 // 2：搜索结果
 const SEARCH_RESULT = "2";
 export default {
+  name: "search-blog",
+  // 3. 注册 mixins
+  mixins: [MescrollCompMixin],
   data() {
     return {
       // 绑定输入框中的内容
