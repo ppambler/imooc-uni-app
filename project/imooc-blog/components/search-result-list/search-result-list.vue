@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:29
- * @LastEditTime: 2021-12-24 19:49:34
+ * @LastEditTime: 2021-12-24 21:05:55
  * @FilePath: \imooc-blog\components\search-result-list\search-result-list.vue
 -->
 <template>
@@ -57,6 +57,17 @@ export default {
       const { data: res } = await getSearchResult({
         q: this.queryStr,
         p: this.page,
+      });
+      // 更改返回数据样式（行内样式）
+      res.list.forEach((item) => {
+        item.title = item.title.replace(
+          /<em>/g,
+          "<em style='color:#f94d2a; margin:0 2px'>"
+        );
+        item.description = item.description.replace(
+          /<em>/g,
+          "<em style='color:#f94d2a; margin:0 2px'>"
+        );
       });
       this.resultList = res.list;
       console.log(this.resultList);
