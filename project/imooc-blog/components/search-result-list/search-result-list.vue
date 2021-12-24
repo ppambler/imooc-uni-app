@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:29
- * @LastEditTime: 2021-12-24 22:39:57
+ * @LastEditTime: 2021-12-25 00:10:47
  * @FilePath: \imooc-blog\components\search-result-list\search-result-list.vue
 -->
 <template>
@@ -56,10 +56,21 @@ export default {
       resultList: [],
       // 页数
       page: 1,
+      // mescroll 实例
+      mescroll: null,
+      // 当页面初次渲染时，不光会回调 init 方法，还会回调 down 和 up 方法
+      // 为了避免在首次就通过 down 和 up 获取数据，于是定义 init 变量，用来表示当前是否为首次请求
+      isInit: true,
     };
   },
-  created() {
-    this.loadSearchResult();
+  // created() {
+  //   // 不需要主动调用
+  //   this.loadSearchResult();
+  // },
+  // 页面渲染完成之后回调，想要获取组件实例，需要在该回调中进行
+  mounted() {
+    // 通过 $refs 获取组件实例
+    this.mescroll = this.$refs.mescrollRef.mescroll;
   },
   methods: {
     /**
@@ -81,27 +92,48 @@ export default {
           "<em style='color:#f94d2a; margin:0 2px'>"
         );
       });
-      this.resultList = res.list;
-      console.log(this.resultList);
+      // 使用下拉刷新、上拉加载的赋值策略
+      // this.resultList = res.list;
+      // console.log(this.resultList);
+      // 判断是否为第一页数据
+      if (this.page === 1) {
+        // 下拉刷新
+        this.resultList = res.list;
+      } else {
+        // 上拉加载
+        this.resultList = [...this.resultList, ...res.list];
+      }
     },
     // 4. 实现三个回调方法
     /**
      * 首次加载
      */
-    mescrollInit() {
-      console.log("首次加载");
+    async mescrollInit() {
+      await this.loadSearchResult();
+      this.isInit = false;
+      // 首次加载完成，关闭 上拉加载更多的动画
+      // endSuccess 表示当前数据加载完成，动画关闭
+      this.mescroll.endSuccess();
     },
     /**
      * 下拉刷新的回调
      */
-    downCallback() {
-      console.log("下拉刷新的回调");
+    async downCallback() {
+      if (this.isInit) return;
+      this.page = 1;
+      await this.loadSearchResult();
+      // 结束 上拉加载 && 下拉刷新
+      this.mescroll.endSuccess();
     },
     /**
      * 上拉加载的回调
      */
-    upCallback() {
-      console.log("上拉加载的回调");
+    async upCallback() {
+      if (this.isInit) return;
+      this.page += 1;
+      await this.loadSearchResult();
+      // 结束 上拉加载 && 下拉刷新
+      this.mescroll.endSuccess();
     },
   },
 };
