@@ -1,12 +1,14 @@
 <!--
  * @Date: 2021-12-21 21:52:29
- * @LastEditTime: 2021-12-25 00:10:47
+ * @LastEditTime: 2021-12-25 00:35:22
  * @FilePath: \imooc-blog\components\search-result-list\search-result-list.vue
 -->
 <template>
   <view class="search-result-list-container">
+    <empty-data v-if="isEmpty"></empty-data>
     <!-- 1. 通过 mescroll-body 包裹列表，指定 ref 为 mescrollRef ，监听@init、@down、@up 事件 -->
     <mescroll-body
+      v-else
       ref="mescrollRef"
       @init="mescrollInit"
       @down="downCallback"
@@ -61,6 +63,8 @@ export default {
       // 当页面初次渲染时，不光会回调 init 方法，还会回调 down 和 up 方法
       // 为了避免在首次就通过 down 和 up 获取数据，于是定义 init 变量，用来表示当前是否为首次请求
       isInit: true,
+      // 是否显示空数据组件
+      isEmpty: false,
     };
   },
   // created() {
@@ -102,6 +106,11 @@ export default {
       } else {
         // 上拉加载
         this.resultList = [...this.resultList, ...res.list];
+      }
+      // this.resultList = [];
+      // 无数据，显示空数据组件
+      if (this.resultList.length === 0) {
+        this.isEmpty = true;
       }
     },
     // 4. 实现三个回调方法
