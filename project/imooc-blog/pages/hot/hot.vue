@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-21 18:41:55
+ * @LastEditTime: 2021-12-25 14:22:28
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -46,6 +46,7 @@
               :key="index"
               :data="item"
               :ranking="index + 1"
+              @click="onItemClick(item)"
             ></hot-list-item>
           </block>
         </view>
@@ -191,6 +192,16 @@ export default {
     onToSearch() {
       uni.navigateTo({
         url: "/subpkg/pages/search-blog/search-blog",
+      });
+    },
+    /**
+     * @description: 热搜列表 item 点击事件
+     * @param {*} item
+     * @return {*}
+     */
+    onItemClick(item) {
+      uni.navigateTo({
+        url: `/subpkg/pages/blog-detail/blog-detail`,
       });
     },
   },

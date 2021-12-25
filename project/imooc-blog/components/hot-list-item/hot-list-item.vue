@@ -1,10 +1,10 @@
 <!--
  * @Date: 2021-12-18 15:48:17
- * @LastEditTime: 2021-12-20 22:53:01
+ * @LastEditTime: 2021-12-25 14:18:40
  * @FilePath: \imooc-blog\components\hot-list-item\hot-list-item.vue
 -->
 <template>
-  <view class="item-container">
+  <view class="item-container" @click="$emit('click')">
     <view class="item-box">
       <!-- 左侧 -->
       <view class="item-box-left">

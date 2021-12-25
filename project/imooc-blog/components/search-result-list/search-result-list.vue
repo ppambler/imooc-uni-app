@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:29
- * @LastEditTime: 2021-12-25 00:35:22
+ * @LastEditTime: 2021-12-25 14:21:51
  * @FilePath: \imooc-blog\components\search-result-list\search-result-list.vue
 -->
 <template>
@@ -16,7 +16,7 @@
     >
       <!-- 循环渲染列表数据 -->
       <block v-for="(item, index) in resultList" :key="index">
-        <view class="search-result-item-box">
+        <view class="search-result-item-box" @click="onItemClick(item)">
           <!-- 内容区 - 样式 1 -->
           <search-result-item-theme-1
             v-if="!item.pic_list || item.pic_list.length === 0"
@@ -143,6 +143,14 @@ export default {
       await this.loadSearchResult();
       // 结束 上拉加载 && 下拉刷新
       this.mescroll.endSuccess();
+    },
+    /**
+     * item 点击事件
+     */
+    onItemClick(item) {
+      uni.navigateTo({
+        url: `/subpkg/pages/blog-detail/blog-detail`,
+      });
     },
   },
 };
