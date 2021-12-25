@@ -1,12 +1,12 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-25 18:45:34
+ * @LastEditTime: 2021-12-25 21:18:40
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
   <view class="detail-container">
     <!-- 文章内容区域 -->
-    <block>
+    <block v-if="articleData">
       <!-- 标题 -->
       <view class="title">{{ articleData.articleTitle }}</view>
       <!-- 作者信息 -->
@@ -29,14 +29,25 @@
         </view>
       </view>
       <!-- 文章内容 -->
-      <rich-text :nodes="articleData.content"></rich-text>
+      <!-- 必须为 mp-html 增加 markdown_views 的类名 -->
+      <mp-html
+        class="markdown_views"
+        :content="addClassFromHTML(articleData.content)"
+        scroll-table
+      />
+      <!-- <rich-text :nodes="articleData.content"></rich-text> -->
     </block>
   </view>
 </template>
 
 <script>
 import { getArticleDetail } from "@/api/article";
+// 导入组件
+import mpHtml from "@/uni_modules/mp-html/components/mp-html/mp-html";
 export default {
+  components: {
+    mpHtml,
+  },
   data() {
     return {
       // 作者名
@@ -71,11 +82,46 @@ export default {
         this.articleData
       );
     },
+    /**
+     * 为所有的 DOM 增加类名
+     */
+    addClassFromHTML(info) {
+      // 先替换 blockquote
+      return info
+        .replace(/<p>/gi, '<p class="p-cls">')
+        .replace(/<a>/gi, '<a class="a-cls">')
+        .replace(/<h1>/gi, '<h1 class="h1-cls">')
+        .replace(/<h2>/gi, '<h2 class="h2-cls">')
+        .replace(/<h3>/gi, '<h3 class="h3-cls">')
+        .replace(/<h4>/gi, '<h4 class="h4-cls">')
+        .replace(/<h5>/gi, '<h5 class="h5-cls">')
+        .replace(/<h6>/gi, '<h6 class="h6-cls">')
+        .replace(/<ul>/gi, '<ul class="ul-cls">')
+        .replace(/<li>/gi, '<li class="li-cls">')
+        .replace(/<ol>/gi, '<ol class="ol-cls">')
+        .replace(/<td>/gi, '<td class="td-cls">')
+        .replace(/<th>/gi, '<th class="th-cls">')
+        .replace(/<tr>/gi, '<tr class="tr-cls">')
+        .replace(/<dl>/gi, '<dl class="dl-cls">')
+        .replace(/<dd>/gi, '<dd class="dd-cls">')
+        .replace(/<hr>/gi, '<hr class="hr-cls">')
+        .replace(/<pre>/gi, '<pre class="pre-cls">')
+        .replace(/<strong>/gi, '<strong class="strong-cls">')
+        .replace(/<input>/gi, '<input class="input-cls">')
+        .replace(/<table>/gi, '<table class="table-cls">')
+        .replace(/<details>/gi, '<details class="details-cls">')
+        .replace(/<code>/gi, '<code class="code-cls">')
+        .replace(/<kbd>/gi, '<kbd class="kbd-cls">')
+        .replace(/<summary>/gi, '<summary class="summary-cls">')
+        .replace(/<blockquote>/gi, '<blockquote class="blockquote-cls">')
+        .replace(/<img/gi, '<img class="img-cls"');
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+@import "~@/styles/article-detail.scss";
 .detail-container {
   padding: $uni-spacing-col-base $uni-spacing-row-base;
   .title {
