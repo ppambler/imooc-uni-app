@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-21 21:52:29
- * @LastEditTime: 2021-12-25 14:21:51
+ * @LastEditTime: 2021-12-25 15:19:46
  * @FilePath: \imooc-blog\components\search-result-list\search-result-list.vue
 -->
 <template>
@@ -149,7 +149,7 @@ export default {
      */
     onItemClick(item) {
       uni.navigateTo({
-        url: `/subpkg/pages/blog-detail/blog-detail`,
+        url: `/subpkg/pages/blog-detail/blog-detail?author=${item.author}&articleId=${item.id}`,
       });
     },
   },

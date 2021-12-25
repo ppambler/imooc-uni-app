@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-25 14:22:28
+ * @LastEditTime: 2021-12-25 15:19:31
  * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -200,8 +200,9 @@ export default {
      * @return {*}
      */
     onItemClick(item) {
+      console.log("🚀 ~ file: hot.vue ~ line 203 ~ onItemClick ~ item", item);
       uni.navigateTo({
-        url: `/subpkg/pages/blog-detail/blog-detail`,
+        url: `/subpkg/pages/blog-detail/blog-detail?author=${item.user_name}&articleId=${item.id}`,
       });
     },
   },
