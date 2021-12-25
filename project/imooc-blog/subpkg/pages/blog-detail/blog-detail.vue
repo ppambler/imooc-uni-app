@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-25 18:12:57
+ * @LastEditTime: 2021-12-25 18:45:34
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -75,4 +75,41 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.detail-container {
+  padding: $uni-spacing-col-base $uni-spacing-row-base;
+  .title {
+    font-size: $uni-font-size-title;
+    color: $uni-text-color-title;
+    font-weight: bold;
+  }
+  .detail-info {
+    padding: $uni-spacing-col-base 0;
+    display: flex;
+    justify-content: space-between;
+
+    .detail-left {
+      display: flex;
+      .author-box {
+        margin-left: $uni-spacing-row-base;
+        display: flex;
+        flex-direction: column;
+        .author {
+          font-size: $uni-font-size-base;
+          font-weight: bolder;
+          color: $uni-color-title;
+        }
+        .release-time {
+          font-size: $uni-font-size-sm;
+          color: $uni-text-color-grey;
+        }
+      }
+    }
+
+    .detail-right {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+</style>
