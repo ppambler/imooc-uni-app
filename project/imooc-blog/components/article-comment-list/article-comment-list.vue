@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 18:59:11
- * @LastEditTime: 2021-12-26 20:31:29
+ * @LastEditTime: 2021-12-26 20:47:07
  * @FilePath: \imooc-blog\components\article-comment-list\article-comment-list.vue
 -->
 <template>
@@ -59,6 +59,10 @@ export default {
       commentList: [],
       // 是否展示全部评论
       isShowAllComment: false,
+      // 是否为 init
+      isInit: true,
+      // 组件实例
+      mescroll: null,
     };
   },
   created() {
@@ -74,25 +78,51 @@ export default {
         page: this.page,
         size: this.pageSize,
       });
-      this.commentList = res.list;
-      console.log(
-        "🚀 ~ file: article-comment-list.vue ~ line 45 ~ loadCommentList ~ this.commentList",
-        this.commentList
-      );
+      // this.commentList = res.list;
+      // console.log(
+      //   "🚀 ~ file: article-comment-list.vue ~ line 45 ~ loadCommentList ~ this.commentList",
+      //   this.commentList
+      // );
+      // 判断是否为第一页数据
+      if (this.page === 1) {
+        this.commentList = res.list;
+      } else {
+        this.commentList = [...this.commentList, ...res.list];
+      }
     },
     /**
      * 首次加载
      */
-    mescrollInit() {},
+    async mescrollInit() {
+      await this.loadCommentList();
+      this.isInit = false;
+      // 结束 上拉加载 && 下拉刷新
+      this.getMescroll().endSuccess();
+    },
     /**
      * 上拉加载更多
      */
-    upCallback() {},
+    async upCallback() {
+      if (this.isInit) return;
+      this.page += 1;
+      await this.loadCommentList();
+      // 结束 上拉加载 && 下拉刷新
+      this.getMescroll().endSuccess();
+    },
     /**
      * 查看全部评论的点击事件
      */
     onMoreClick() {
       this.isShowAllComment = true;
+    },
+    /**
+     * 返回 mescroll实例对象
+     */
+    getMescroll() {
+      if (!this.mescroll) {
+        this.mescroll = this.$refs.mescrollRef.mescroll;
+      }
+      return this.mescroll;
     },
   },
 };
