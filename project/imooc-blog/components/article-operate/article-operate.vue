@@ -1,13 +1,22 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-26 21:47:15
+ * @LastEditTime: 2021-12-26 22:04:17
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
   <view class="operate-container">
     <!-- 输入框 -->
     <view class="comment-box">
-      <my-search placeholderText="评论一句，前排打 call..."></my-search>
+      <my-search
+        placeholderText="评论一句，前排打 call..."
+        :config="{
+          height: 28,
+          backgroundColor: '#eeedf4',
+          icon: '/static/images/input-icon.png',
+          textColor: '#a6a5ab',
+          border: 'none',
+        }"
+      ></my-search>
     </view>
     <!-- 点赞 -->
     <view class="options-box">

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 19:17:50
- * @LastEditTime: 2021-12-21 20:40:26
+ * @LastEditTime: 2021-12-26 22:03:04
  * @FilePath: \imooc-blog\components\my-search\my-search.vue
 -->
 <template>
@@ -23,11 +23,25 @@
       <uni-icons slot="clearIcon" type="clear" color="#999999" />
     </uni-search-bar>
     <!-- 搜索按钮 -->
-    <view class="my-search-box" v-else>
+    <view
+      class="my-search-box"
+      v-else
+      :style="{
+        height: config.height + 'px',
+        backgroundColor: config.backgroundColor,
+        border: config.border,
+      }"
+    >
       <!-- 搜索图标 -->
-      <image class="icon" src="@/static/images/search.png" mode="aspectFit" />
+      <image class="icon" :src="config.icon" mode="aspectFit" />
       <!-- placeholder -->
-      <text class="placeholder">{{ placeholderText }}</text>
+      <text
+        class="placeholder"
+        :style="{
+          color: config.textColor,
+        }"
+        >{{ placeholderText }}</text
+      >
     </view>
   </view>
 </template>
