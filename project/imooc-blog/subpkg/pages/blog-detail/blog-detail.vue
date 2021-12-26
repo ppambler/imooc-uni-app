@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-26 20:32:55
+ * @LastEditTime: 2021-12-26 21:42:34
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -46,6 +46,8 @@
           ></article-comment-list>
         </view>
       </block>
+      <!-- 底部功能区 -->
+      <article-operate />
     </view>
   </page-meta>
 </template>
