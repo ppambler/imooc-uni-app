@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-26 19:25:38
+ * @LastEditTime: 2021-12-26 20:32:55
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -39,7 +39,11 @@
         <!-- <rich-text :nodes="articleData.content"></rich-text> -->
         <!-- 评论列表 -->
         <view class="comment-box">
-          <article-comment-list :articleId="articleId" />
+          <!-- 1. 给 mescroll-body 的组件添加：ref="mescrollItem"（mescrollItem 是固定的不可以变化） -->
+          <article-comment-list
+            ref="mescrollItem"
+            :articleId="articleId"
+          ></article-comment-list>
         </view>
       </block>
     </view>
@@ -50,7 +54,12 @@
 import { getArticleDetail } from "@/api/article";
 // 导入组件
 import mpHtml from "@/uni_modules/mp-html/components/mp-html/mp-html";
+// 2. 引入 mescroll-comp.js
+import MescrollCompMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js";
 export default {
+  name: "blog-detail",
+  // 3. 注册 mixins
+  mixins: [MescrollCompMixin],
   components: {
     mpHtml,
   },
