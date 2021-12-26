@@ -1,10 +1,17 @@
 <!--
  * @Date: 2021-12-26 18:59:11
- * @LastEditTime: 2021-12-26 19:00:59
+ * @LastEditTime: 2021-12-26 19:30:05
  * @FilePath: \imooc-blog\components\article-comment-list\article-comment-list.vue
 -->
 <template>
-  <view> </view>
+  <view class="comment-limit-container">
+    <view class="comment-title">精简评论</view>
+    <block v-for="(item, index) in commentList.slice(0, 2)" :key="index">
+      <!-- item 项组件 -->
+      <article-comment-item :data="item.info" />
+    </block>
+    <view class="show-more">查看更多评论</view>
+  </view>
 </template>
 
 <script>
@@ -24,7 +31,7 @@ export default {
       page: 1,
       // 每页评论数
       pageSize: 5,
-      // 评论列表
+      // 评论列表数据源
       commentList: [],
     };
   },

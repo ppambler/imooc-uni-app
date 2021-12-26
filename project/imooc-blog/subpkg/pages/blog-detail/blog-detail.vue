@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-26 19:01:24
+ * @LastEditTime: 2021-12-26 19:25:38
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -130,6 +130,7 @@ export default {
 @import "~@/styles/article-detail.scss";
 .detail-container {
   padding: $uni-spacing-col-base $uni-spacing-row-base;
+  padding-bottom: 88px;
   .title {
     font-size: $uni-font-size-title;
     color: $uni-text-color-title;
