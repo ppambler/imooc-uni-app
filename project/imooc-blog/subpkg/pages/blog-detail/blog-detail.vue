@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-25 21:31:37
+ * @LastEditTime: 2021-12-26 19:01:24
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -37,6 +37,10 @@
           scroll-table
         />
         <!-- <rich-text :nodes="articleData.content"></rich-text> -->
+        <!-- 评论列表 -->
+        <view class="comment-box">
+          <article-comment-list :articleId="articleId" />
+        </view>
       </block>
     </view>
   </page-meta>
