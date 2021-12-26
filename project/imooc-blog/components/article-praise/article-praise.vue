@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:50
- * @LastEditTime: 2021-12-26 21:41:36
+ * @LastEditTime: 2021-12-26 21:47:32
  * @FilePath: \imooc-blog\components\article-praise\article-praise.vue
 -->
 <template>
@@ -19,4 +19,21 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.praise-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .img {
+    width: $uni-img-size-base;
+    height: $uni-img-size-base;
+    color: $uni-text-color;
+  }
+
+  .txt {
+    font-size: $uni-font-size-sm;
+    color: $uni-text-color;
+  }
+}
+</style>

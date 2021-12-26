@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:38:29
- * @LastEditTime: 2021-12-26 21:41:57
+ * @LastEditTime: 2021-12-26 21:48:24
  * @FilePath: \imooc-blog\components\article-collect\article-collect.vue
 -->
 <template>
@@ -19,4 +19,20 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.collect-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .img {
+    width: $uni-img-size-base;
+    height: $uni-img-size-base;
+  }
+
+  .txt {
+    font-size: $uni-font-size-sm;
+    color: $uni-text-color;
+  }
+}
+</style>

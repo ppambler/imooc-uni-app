@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-26 21:40:58
+ * @LastEditTime: 2021-12-26 21:47:15
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
@@ -29,4 +29,22 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.operate-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $uni-bg-color;
+  padding: 4px 6px 32px 6px;
+  display: flex;
+  border-top: 1px solid $uni-bg-color-grey;
+  align-items: center;
+  .comment-box {
+    flex-grow: 2;
+  }
+  .options-box {
+    flex-grow: 1;
+  }
+}
+</style>
