@@ -34,4 +34,29 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.comment-item-container {
+  padding: $uni-spacing-col-lg 0;
+  display: flex;
+  .info-box {
+    margin-left: $uni-spacing-row-sm;
+    display: flex;
+    flex-direction: column;
+    .comment-user {
+      font-size: $uni-font-size-sm;
+      font-weight: bolder;
+      color: $uni-text-color;
+    }
+    .comment-info {
+      margin-top: $uni-spacing-col-sm;
+      font-size: $uni-font-size-base;
+      color: $uni-text-color;
+    }
+    .comment-time {
+      margin-top: $uni-spacing-col-sm;
+      font-size: $uni-font-size-sm;
+      color: $uni-text-color-grey;
+    }
+  }
+}
+</style>

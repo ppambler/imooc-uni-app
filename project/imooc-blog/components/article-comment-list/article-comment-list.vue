@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 18:59:11
- * @LastEditTime: 2021-12-26 19:30:05
+ * @LastEditTime: 2021-12-26 20:08:16
  * @FilePath: \imooc-blog\components\article-comment-list\article-comment-list.vue
 -->
 <template>
@@ -58,4 +58,19 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.comment-title {
+  font-weight: bold;
+  color: $uni-text-color-title;
+  font-size: $uni-font-size-lg;
+  margin: $uni-spacing-col-lg 0;
+}
+.comment-limit-container {
+  .show-more {
+    margin: $uni-spacing-col-lg;
+    text-align: center;
+    color: $uni-text-color-more;
+    font-size: $uni-font-size-base;
+  }
+}
+</style>
