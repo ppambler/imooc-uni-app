@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 18:59:11
- * @LastEditTime: 2021-12-26 20:47:07
+ * @LastEditTime: 2021-12-26 21:25:41
  * @FilePath: \imooc-blog\components\article-comment-list\article-comment-list.vue
 -->
 <template>
@@ -22,6 +22,9 @@
         @up="upCallback"
         :down="{
           use: false,
+        }"
+        :up="{
+          textNoMore: '-- 我也是有底线的 --',
         }"
       >
         <view class="comment-title">全部评论</view>
@@ -63,6 +66,8 @@ export default {
       isInit: true,
       // 组件实例
       mescroll: null,
+      // 评论总数
+      commentListTotal: 0,
     };
   },
   created() {
@@ -83,6 +88,8 @@ export default {
       //   "🚀 ~ file: article-comment-list.vue ~ line 45 ~ loadCommentList ~ this.commentList",
       //   this.commentList
       // );
+      // 获取总数量
+      this.commentListTotal = res.count;
       // 判断是否为第一页数据
       if (this.page === 1) {
         this.commentList = res.list;
@@ -98,6 +105,8 @@ export default {
       this.isInit = false;
       // 结束 上拉加载 && 下拉刷新
       this.getMescroll().endSuccess();
+      // 判断数据是否加载完成
+      this.mescroll.endBySize(this.commentList.length, this.commentListTotal);
     },
     /**
      * 上拉加载更多
@@ -108,6 +117,8 @@ export default {
       await this.loadCommentList();
       // 结束 上拉加载 && 下拉刷新
       this.getMescroll().endSuccess();
+      // 判断数据是否加载完成
+      this.mescroll.endBySize(this.commentList.length, this.commentListTotal);
     },
     /**
      * 查看全部评论的点击事件
