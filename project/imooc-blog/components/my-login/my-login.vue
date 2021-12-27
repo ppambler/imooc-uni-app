@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-27 21:21:35
- * @LastEditTime: 2021-12-27 21:22:29
+ * @LastEditTime: 2021-12-27 22:57:59
  * @FilePath: \imooc-blog\components\my-login\my-login.vue
 -->
 <template>
@@ -21,10 +21,45 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "my-login",
   data() {
     return {};
+  },
+  methods: {
+    ...mapActions("user", ["login"]),
+    /**
+     * 获取用户信息
+     */
+    getUserInfo() {
+      // 展示加载框
+      uni.showLoading({
+        title: "加载中",
+      });
+      uni.getUserProfile({
+        desc: "登录后可同步数据",
+        success: async (obj) => {
+          console.log(
+            "🚀 ~ file: my-login.vue ~ line 43 ~ success: ~ obj",
+            obj
+          );
+          // 调用 action ，请求登录接口
+          await this.login(obj);
+        },
+        fail: () => {
+          uni.showToast({
+            title: "授权已取消",
+            icon: "error",
+            mask: true,
+          });
+        },
+        complete: () => {
+          // 隐藏loading
+          uni.hideLoading();
+        },
+      });
+    },
   },
 };
 </script>
