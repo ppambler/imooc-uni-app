@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-28 20:07:03
+ * @LastEditTime: 2021-12-28 21:10:56
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -55,7 +55,11 @@
         </view>
       </block>
       <!-- 底部功能区 -->
-      <article-operate />
+      <article-operate @commitClick="onCommit" />
+      <!-- 输入评论的popup -->
+      <uni-popup ref="popup" type="bottom">
+        <article-comment-commit />
+      </uni-popup>
     </view>
   </page-meta>
 </template>
@@ -166,6 +170,13 @@ export default {
       this.articleData.isFollow = !this.articleData.isFollow;
       // 关闭 button 的 loading
       this.isFollowLoading = false;
+    },
+    /**
+     * 发布评论点击事件
+     */
+    onCommit() {
+      // 通过组件定义的ref调用uni-popup方法
+      this.$refs.popup.open();
     },
   },
 };

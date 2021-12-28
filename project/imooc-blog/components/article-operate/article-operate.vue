@@ -1,12 +1,12 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-26 22:04:17
+ * @LastEditTime: 2021-12-28 21:06:48
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
   <view class="operate-container">
     <!-- 输入框 -->
-    <view class="comment-box">
+    <view class="comment-box" @click="onCommitClick">
       <my-search
         placeholderText="评论一句，前排打 call..."
         :config="{
@@ -30,10 +30,24 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "article-operate",
   data() {
     return {};
+  },
+  methods: {
+    ...mapActions("user", ["isLogin"]),
+    /**
+     * my-search 的点击事件
+     */
+    async onCommitClick() {
+      // 进行登录判定，登录之后允许发布评论
+      if (!(await this.isLogin())) {
+        return;
+      }
+      this.$emit("commitClick");
+    },
   },
 };
 </script>
