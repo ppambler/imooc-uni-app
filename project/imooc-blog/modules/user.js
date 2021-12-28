@@ -33,6 +33,13 @@ export default {
       });
     },
     /**
+     * 删除 token
+     */
+    removeToken(state) {
+      state.token = "";
+      this.commit("user/saveToken");
+    },
+    /**
      * 保存 用户信息 到 vuex
      */
     setUserInfo(state, userInfo) {
@@ -47,6 +54,13 @@ export default {
         key: STORAGE_KEY,
         data: state.userInfo,
       });
+    },
+    /**
+     * 删除用户信息
+     */
+    removeUserInfo(state) {
+      state.userInfo = {};
+      this.commit("user/saveUserInfo");
     },
   },
   // 异步操作放这儿
@@ -76,6 +90,13 @@ export default {
       // 登录逻辑
       this.commit("user/setToken", res.token);
       this.commit("user/setUserInfo", JSON.parse(userProfile.rawData));
+    },
+    /**
+     * 退出登录
+     */
+    logout(context) {
+      this.commit("user/removeToken");
+      this.commit("user/removeUserInfo");
     },
   },
 };

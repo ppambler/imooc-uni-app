@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-27 21:21:35
- * @LastEditTime: 2021-12-28 16:35:57
+ * @LastEditTime: 2021-12-28 17:10:47
  * @FilePath: \imooc-blog\components\my-login\my-login.vue
 -->
 <template>
@@ -43,7 +43,7 @@ export default {
     ...mapState("user", ["token", "userInfo"]),
   },
   methods: {
-    ...mapActions("user", ["login"]),
+    ...mapActions("user", ["login", "logout"]),
     /**
      * 获取用户信息
      */
@@ -72,6 +72,20 @@ export default {
         complete: () => {
           // 隐藏loading
           uni.hideLoading();
+        },
+      });
+    },
+    /**
+     * 退出登录
+     */
+    onLogoutClick() {
+      uni.showModal({
+        title: "提示",
+        content: "退出登录将无法同步数据哦~",
+        success: ({ confirm, cancel }) => {
+          if (confirm) {
+            this.logout();
+          }
         },
       });
     },
