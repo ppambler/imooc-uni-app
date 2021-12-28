@@ -1,12 +1,12 @@
 <!--
  * @Date: 2021-12-27 21:21:35
- * @LastEditTime: 2021-12-27 22:57:59
+ * @LastEditTime: 2021-12-28 16:35:57
  * @FilePath: \imooc-blog\components\my-login\my-login.vue
 -->
 <template>
   <view class="my-container">
     <!-- 用户未登录 -->
-    <block>
+    <block v-if="!token">
       <image
         class="avatar avatar-img"
         src="@/static/images/default-avatar.png"
@@ -17,15 +17,30 @@
         微信用户一键登录
       </button>
     </block>
+    <!-- 已登录 -->
+    <block v-else>
+      <image
+        class="avatar avatar-img"
+        :src="userInfo.avatarUrl"
+        mode="scaleToFill"
+      />
+      <view class="login-desc">{{ userInfo.nickName }}</view>
+      <button class="login-btn" type="default" @click="onLogoutClick">
+        退出登录
+      </button>
+    </block>
   </view>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "my-login",
   data() {
     return {};
+  },
+  computed: {
+    ...mapState("user", ["token", "userInfo"]),
   },
   methods: {
     ...mapActions("user", ["login"]),
