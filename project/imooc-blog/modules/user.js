@@ -98,5 +98,13 @@ export default {
       this.commit("user/removeToken");
       this.commit("user/removeUserInfo");
     },
+    /**
+     * 进行登录判定
+     */
+    isLogin(context) {
+      if (context.state.token) return true;
+      // TODO: 如果用户未登录，则引导用户进入登录页面
+      return false;
+    },
   },
 };
