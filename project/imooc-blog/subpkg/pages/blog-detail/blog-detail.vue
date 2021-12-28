@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-28 21:10:56
+ * @LastEditTime: 2021-12-28 21:32:45
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -57,8 +57,8 @@
       <!-- 底部功能区 -->
       <article-operate @commitClick="onCommit" />
       <!-- 输入评论的popup -->
-      <uni-popup ref="popup" type="bottom">
-        <article-comment-commit />
+      <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
+        <article-comment-commit v-if="isShowCommit" />
       </uni-popup>
     </view>
   </page-meta>
@@ -89,6 +89,8 @@ export default {
       articleData: null,
       // 关注用户的 loading
       isFollowLoading: false,
+      // popup 的显示状态
+      isShowCommit: false,
     };
   },
   onLoad(options) {
@@ -177,6 +179,23 @@ export default {
     onCommit() {
       // 通过组件定义的ref调用uni-popup方法
       this.$refs.popup.open();
+    },
+    /**
+     * 发布评论的 popup 切换事件
+     */
+    onCommitPopupChange(e) {
+      console.log(
+        "🚀 ~ file: blog-detail.vue ~ line 187 ~ onCommitPopupChange ~ e",
+        e
+      );
+      // 修改对应的标记，当 popup 关闭时，为了动画平顺，进行延迟处理
+      if (e.show) {
+        this.isShowCommit = e.show;
+      } else {
+        setTimeout(() => {
+          this.isShowCommit = e.show;
+        }, 200);
+      }
     },
   },
 };

@@ -1,10 +1,10 @@
 <!--
  * @Date: 2021-12-28 21:08:55
- * @LastEditTime: 2021-12-28 21:09:27
+ * @LastEditTime: 2021-12-28 21:35:02
  * @FilePath: \imooc-blog\components\article-comment-commit\article-comment-commit.vue
 -->
 <template>
-  <view class="comment-container">
+  <view class="comment-container" :style="{ bottom: bottom + 'px' }">
     <uni-easyinput
       v-model="value"
       type="textarea"
@@ -30,7 +30,14 @@ export default {
   data() {
     return {
       value: "",
+      bottom: 0,
     };
+  },
+  created() {
+    // 检测软键盘的变化
+    uni.onKeyboardHeightChange(({ height }) => {
+      this.bottom = height;
+    });
   },
   methods: {
     /**
