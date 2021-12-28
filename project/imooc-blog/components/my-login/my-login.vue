@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-27 21:21:35
- * @LastEditTime: 2021-12-28 17:10:47
+ * @LastEditTime: 2021-12-28 18:53:56
  * @FilePath: \imooc-blog\components\my-login\my-login.vue
 -->
 <template>
@@ -61,6 +61,8 @@ export default {
           );
           // 调用 action ，请求登录接口
           await this.login(obj);
+          // 登录成功之后，发送事件
+          this.$emit("onLoginSuccess");
         },
         fail: () => {
           uni.showToast({
