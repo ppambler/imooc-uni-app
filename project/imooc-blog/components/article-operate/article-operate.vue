@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-28 21:06:48
+ * @LastEditTime: 2021-12-29 01:39:36
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
@@ -20,7 +20,10 @@
     </view>
     <!-- 点赞 -->
     <view class="options-box">
-      <article-praise />
+      <article-praise
+        :articleData="articleData"
+        @changePraise="$emit('changePraise', $event)"
+      />
     </view>
     <!-- 收藏 -->
     <view class="options-box">
@@ -33,6 +36,12 @@
 import { mapActions } from "vuex";
 export default {
   name: "article-operate",
+  props: {
+    articleData: {
+      type: Object,
+      // required: true,
+    },
+  },
   data() {
     return {};
   },

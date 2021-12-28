@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-29 00:26:20
+ * @LastEditTime: 2021-12-29 01:17:07
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -55,7 +55,11 @@
         </view>
       </block>
       <!-- 底部功能区 -->
-      <article-operate @commitClick="onCommit" />
+      <article-operate
+        :articleData="articleData"
+        @commitClick="onCommit"
+        @changePraise="onChangePraise"
+      />
       <!-- 输入评论的popup -->
       <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
         <article-comment-commit
@@ -210,6 +214,12 @@ export default {
       this.isShowCommit = false;
       // 显示评论数据
       this.$refs.mescrollItem.addCommentList(data);
+    },
+    /**
+     * 点赞处理回调
+     */
+    onChangePraise(isPraise) {
+      this.articleData.isPraise = isPraise;
     },
   },
 };

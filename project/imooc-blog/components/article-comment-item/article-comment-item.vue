@@ -1,3 +1,8 @@
+<!--
+ * @Date: 2021-12-26 19:50:17
+ * @LastEditTime: 2021-12-29 01:35:22
+ * @FilePath: \imooc-blog\components\article-comment-item\article-comment-item.vue
+-->
 <template>
   <view class="comment-item-container">
     <!-- 头像 -->
