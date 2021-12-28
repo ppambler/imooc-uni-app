@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-28 21:08:55
- * @LastEditTime: 2021-12-28 21:35:02
+ * @LastEditTime: 2021-12-29 00:06:10
  * @FilePath: \imooc-blog\components\article-comment-commit\article-comment-commit.vue
 -->
 <template>
@@ -25,8 +25,15 @@
 </template>
 
 <script>
+import { userArticleComment } from "@/api/user";
 export default {
   name: "article-comment-commit",
+  props: {
+    articleId: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       value: "",
@@ -43,7 +50,24 @@ export default {
     /**
      * 发送按钮点击事件
      */
-    onBtnClick() {},
+    async onBtnClick() {
+      // 展示加载框
+      uni.showLoading({
+        title: "加载中",
+      });
+      // 异步处理即可
+      await userArticleComment({
+        articleId: this.articleId,
+        content: this.value,
+      });
+      uni.showToast({
+        title: "发表成功",
+        icon: "success",
+        mask: true,
+      });
+      // 发表成功之后的回调
+      this.$emit("success");
+    },
   },
 };
 </script>

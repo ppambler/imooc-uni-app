@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-28 21:32:45
+ * @LastEditTime: 2021-12-29 00:07:22
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -58,7 +58,11 @@
       <article-operate @commitClick="onCommit" />
       <!-- 输入评论的popup -->
       <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
-        <article-comment-commit v-if="isShowCommit" />
+        <article-comment-commit
+          v-if="isShowCommit"
+          :articleId="articleId"
+          @success="onSendSuccess"
+        />
       </uni-popup>
     </view>
   </page-meta>
@@ -196,6 +200,14 @@ export default {
           this.isShowCommit = e.show;
         }, 200);
       }
+    },
+    /**
+     * 发表评论成功
+     */
+    onSendSuccess() {
+      // 关闭弹出层
+      this.$refs.popup.close();
+      this.isShowCommit = false;
     },
   },
 };
