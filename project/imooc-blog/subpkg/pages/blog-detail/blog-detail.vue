@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-28 18:40:48
+ * @LastEditTime: 2021-12-28 20:07:03
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -26,8 +26,14 @@
           </view>
           <view class="detail-right">
             <!-- 关注按钮 -->
-            <button class="follow" size="mini" @click="onFollowClick">
-              关注
+            <button
+              class="follow"
+              size="mini"
+              :type="articleData.isFollow ? 'primary' : 'default'"
+              :loading="isFollowLoading"
+              @click="onFollowClick"
+            >
+              {{ articleData.isFollow ? "已关注" : "关注" }}
             </button>
           </view>
         </view>
@@ -61,6 +67,7 @@ import mpHtml from "@/uni_modules/mp-html/components/mp-html/mp-html";
 // 2. 引入 mescroll-comp.js
 import MescrollCompMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js";
 import { mapActions } from "vuex";
+import { userFollow } from "@/api/user";
 export default {
   name: "blog-detail",
   // 3. 注册 mixins
@@ -76,6 +83,8 @@ export default {
       articleId: "",
       // 文章详情数据
       articleData: null,
+      // 关注用户的 loading
+      isFollowLoading: false,
     };
   },
   onLoad(options) {
@@ -146,6 +155,17 @@ export default {
       if (!isLogin) {
         return;
       }
+      // 关注用户
+      // 开启 button 的 loading
+      this.isFollowLoading = true;
+      const { data: res } = await userFollow({
+        author: this.author,
+        isFollow: !this.articleData.isFollow,
+      });
+      // 修改用户数据
+      this.articleData.isFollow = !this.articleData.isFollow;
+      // 关闭 button 的 loading
+      this.isFollowLoading = false;
     },
   },
 };
