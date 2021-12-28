@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-27 22:45:05
- * @LastEditTime: 2021-12-29 00:58:01
+ * @LastEditTime: 2021-12-29 01:46:47
  * @FilePath: \imooc-blog\api\user.js
  */
 import request from "@/utils/request";
@@ -43,6 +43,16 @@ export function userArticleComment(data) {
 export function userPraise(data) {
   return request({
     url: "/user/praise",
+    data,
+  });
+}
+
+/**
+ * 用户收藏
+ */
+export function userCollect(data) {
+  return request({
+    url: "/user/collect",
     data,
   });
 }

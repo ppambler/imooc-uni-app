@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-29 01:39:36
+ * @LastEditTime: 2021-12-29 01:49:01
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
@@ -27,7 +27,10 @@
     </view>
     <!-- 收藏 -->
     <view class="options-box">
-      <article-collect />
+      <article-collect
+        :articleData="articleData"
+        @changeCollect="$emit('changeCollect', $event)"
+      />
     </view>
   </view>
 </template>

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-29 01:17:07
+ * @LastEditTime: 2021-12-29 01:49:39
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -59,6 +59,7 @@
         :articleData="articleData"
         @commitClick="onCommit"
         @changePraise="onChangePraise"
+        @changeCollect="onChangeCollect"
       />
       <!-- 输入评论的popup -->
       <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
@@ -220,6 +221,12 @@ export default {
      */
     onChangePraise(isPraise) {
       this.articleData.isPraise = isPraise;
+    },
+    /**
+     * 收藏处理回调
+     */
+    onChangeCollect(isCollect) {
+      this.articleData.isCollect = isCollect;
     },
   },
 };
