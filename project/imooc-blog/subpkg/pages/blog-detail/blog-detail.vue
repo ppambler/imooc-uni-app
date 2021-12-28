@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-26 21:42:34
+ * @LastEditTime: 2021-12-28 18:40:48
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -26,7 +26,9 @@
           </view>
           <view class="detail-right">
             <!-- 关注按钮 -->
-            <button class="follow" size="mini">关注</button>
+            <button class="follow" size="mini" @click="onFollowClick">
+              关注
+            </button>
           </view>
         </view>
         <!-- 文章内容 -->
@@ -58,6 +60,7 @@ import { getArticleDetail } from "@/api/article";
 import mpHtml from "@/uni_modules/mp-html/components/mp-html/mp-html";
 // 2. 引入 mescroll-comp.js
 import MescrollCompMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mixins/mescroll-comp.js";
+import { mapActions } from "vuex";
 export default {
   name: "blog-detail",
   // 3. 注册 mixins
@@ -81,6 +84,7 @@ export default {
     this.loadArticleDetail();
   },
   methods: {
+    ...mapActions("user", ["isLogin"]),
     /**
      * 获取文章详情数据
      */
@@ -132,6 +136,16 @@ export default {
         .replace(/<summary>/gi, '<summary class="summary-cls">')
         .replace(/<blockquote>/gi, '<blockquote class="blockquote-cls">')
         .replace(/<img/gi, '<img class="img-cls"');
+    },
+    /**
+     *  关注按钮点击事件
+     */
+    async onFollowClick() {
+      // 进行登录判定
+      const isLogin = await this.isLogin();
+      if (!isLogin) {
+        return;
+      }
     },
   },
 };

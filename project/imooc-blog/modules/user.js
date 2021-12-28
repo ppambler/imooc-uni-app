@@ -101,9 +101,19 @@ export default {
     /**
      * 进行登录判定
      */
-    isLogin(context) {
+    async isLogin(context) {
       if (context.state.token) return true;
-      // TODO: 如果用户未登录，则引导用户进入登录页面
+      // 如果用户未登录，则引导用户进入登录页面
+      const [error, res] = await uni.showModal({
+        title: "登录之后才可以进行后续操作",
+        content: "立即跳转到登录页面？（登录后回自动返回当前页面哦~~~）",
+      });
+      const { cancel, confirm } = res;
+      if (confirm) {
+        uni.navigateTo({
+          url: "/subpkg/pages/login-page/login-page",
+        });
+      }
       return false;
     },
   },
