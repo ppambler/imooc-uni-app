@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 18:59:11
- * @LastEditTime: 2021-12-26 21:25:41
+ * @LastEditTime: 2021-12-29 00:23:27
  * @FilePath: \imooc-blog\components\article-comment-list\article-comment-list.vue
 -->
 <template>
@@ -134,6 +134,12 @@ export default {
         this.mescroll = this.$refs.mescrollRef.mescroll;
       }
       return this.mescroll;
+    },
+    /**
+     * 为 commentList 增加一个评论
+     */
+    addCommentList(data) {
+      this.commentList.unshift(data);
     },
   },
 };

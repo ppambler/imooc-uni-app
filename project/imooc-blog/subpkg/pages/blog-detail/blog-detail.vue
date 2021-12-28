@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-29 00:07:22
+ * @LastEditTime: 2021-12-29 00:26:20
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -204,10 +204,12 @@ export default {
     /**
      * 发表评论成功
      */
-    onSendSuccess() {
+    onSendSuccess(data) {
       // 关闭弹出层
       this.$refs.popup.close();
       this.isShowCommit = false;
+      // 显示评论数据
+      this.$refs.mescrollItem.addCommentList(data);
     },
   },
 };
