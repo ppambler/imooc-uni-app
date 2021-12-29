@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 18:37:12
- * @LastEditTime: 2021-12-29 19:02:30
+ * @LastEditTime: 2021-12-29 20:06:28
  * @FilePath: \imooc-blog\components\hot-video-item\hot-video-item.vue
 -->
 <template>
@@ -15,7 +15,9 @@
         controls
       />
     </view>
-    <hot-video-info :data="data" />
+    <view @click="$emit('click')">
+      <hot-video-info :data="data" />
+    </view>
   </view>
 </template>
 

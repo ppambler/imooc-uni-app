@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:55
- * @LastEditTime: 2021-12-29 19:37:41
+ * @LastEditTime: 2021-12-29 20:06:45
  * @FilePath: \imooc-blog\pages\hot-video\hot-video.vue
 -->
 <template>
@@ -13,7 +13,7 @@
       @up="upCallback"
     >
       <block v-for="(item, index) in videoList" :key="index">
-        <hot-video-item :data="item" />
+        <hot-video-item :data="item" @click="onItemClick" />
       </block>
     </mescroll-body>
   </view>
@@ -40,10 +40,10 @@ export default {
   },
   created() {
     // this.loadHotVideoList();
-    uni.showModal({
-      title: "提示",
-      content: "因浏览器对视频解析问题，具体呈现效果可能会存在差异! ",
-    });
+    // uni.showModal({
+    //   title: "提示",
+    //   content: "因浏览器对视频解析问题，具体呈现效果可能会存在差异! ",
+    // });
   },
   mounted() {
     this.mescroll = this.$refs.mescrollRef.mescroll;
@@ -93,6 +93,14 @@ export default {
       await this.loadHotVideoList();
       // 结束 上拉加载 && 下拉刷新
       this.mescroll.endSuccess();
+    },
+    /**
+     * item 点击事件
+     */
+    onItemClick() {
+      uni.navigateTo({
+        url: `/subpkg/pages/video-detail/video-detail`,
+      });
     },
   },
 };
