@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:55
- * @LastEditTime: 2021-12-29 20:06:45
+ * @LastEditTime: 2021-12-29 20:54:38
  * @FilePath: \imooc-blog\pages\hot-video\hot-video.vue
 -->
 <template>
@@ -23,6 +23,7 @@
 import { getHotVideoList } from "@/api/video";
 // 2. 导入 mixin
 import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";
+import { mapMutations } from "vuex";
 export default {
   // 3. 注册 mixin
   mixins: [MescrollMixin],
@@ -49,6 +50,7 @@ export default {
     this.mescroll = this.$refs.mescrollRef.mescroll;
   },
   methods: {
+    ...mapMutations("video", ["setVideoData"]),
     /**
      * 获取列表数据
      */
@@ -97,7 +99,9 @@ export default {
     /**
      * item 点击事件
      */
-    onItemClick() {
+    onItemClick(data) {
+      // 保存当前点击的 video 数据到 vuex
+      this.setVideoData(data);
       uni.navigateTo({
         url: `/subpkg/pages/video-detail/video-detail`,
       });
