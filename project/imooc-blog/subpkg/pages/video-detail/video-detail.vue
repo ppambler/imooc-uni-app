@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-29 20:55:46
+ * @LastEditTime: 2021-12-29 23:10:09
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -11,6 +11,7 @@
           id="myVideo"
           class="video"
           :src="videoData.play_url"
+          :danmu-list="danmuList"
           enable-danmu
           danmu-btn
           controls
@@ -24,12 +25,34 @@
 
 <script>
 import { mapState } from "vuex";
+import { getVideoDanmuList } from "@/api/video";
 export default {
   data() {
-    return {};
+    return {
+      // 弹幕数据源
+      danmuList: [],
+    };
   },
   computed: {
     ...mapState("video", ["videoData"]),
+  },
+  created() {
+    this.loadVideoDanmuList();
+  },
+  methods: {
+    /**
+     * 获取弹幕数据
+     */
+    async loadVideoDanmuList() {
+      const { data: res } = await getVideoDanmuList({
+        videoId: this.videoData.id,
+      });
+      this.danmuList = res.list;
+      console.log(
+        "🚀 ~ file: video-detail.vue ~ line 50 ~ loadVideoDanmuList ~ this.danmuList",
+        this.danmuList
+      );
+    },
   },
 };
 </script>

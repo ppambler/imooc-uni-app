@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:55
- * @LastEditTime: 2021-12-29 20:54:38
+ * @LastEditTime: 2021-12-29 23:25:21
  * @FilePath: \imooc-blog\pages\hot-video\hot-video.vue
 -->
 <template>
@@ -100,6 +100,10 @@ export default {
      * item 点击事件
      */
     onItemClick(data) {
+      console.log(
+        "🚀 ~ file: hot-video.vue ~ line 103 ~ onItemClick ~ data",
+        data
+      );
       // 保存当前点击的 video 数据到 vuex
       this.setVideoData(data);
       uni.navigateTo({
