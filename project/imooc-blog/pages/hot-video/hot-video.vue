@@ -1,10 +1,14 @@
 <!--
  * @Date: 2021-12-16 17:16:55
- * @LastEditTime: 2021-12-29 17:43:30
+ * @LastEditTime: 2021-12-29 19:01:55
  * @FilePath: \imooc-blog\pages\hot-video\hot-video.vue
 -->
 <template>
-  <view> </view>
+  <view class="hot-video-container">
+    <block v-for="(item, index) in videoList" :key="index">
+      <hot-video-item :data="item" />
+    </block>
+  </view>
 </template>
 
 <script>
@@ -40,4 +44,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.hot-video-container {
+  background-color: $uni-bg-color-grey;
+}
+</style>
