@@ -1,29 +1,52 @@
 <!--
  * @Date: 2021-12-16 17:16:55
- * @LastEditTime: 2021-12-29 19:01:55
+ * @LastEditTime: 2021-12-29 19:37:41
  * @FilePath: \imooc-blog\pages\hot-video\hot-video.vue
 -->
 <template>
   <view class="hot-video-container">
-    <block v-for="(item, index) in videoList" :key="index">
-      <hot-video-item :data="item" />
-    </block>
+    <!-- 1. 导入 mescroll-body -->
+    <mescroll-body
+      ref="mescrollRef"
+      @init="mescrollInit"
+      @down="downCallback"
+      @up="upCallback"
+    >
+      <block v-for="(item, index) in videoList" :key="index">
+        <hot-video-item :data="item" />
+      </block>
+    </mescroll-body>
   </view>
 </template>
 
 <script>
-import { getHotVideoList } from "api/video";
+import { getHotVideoList } from "@/api/video";
+// 2. 导入 mixin
+import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/mescroll-mixins.js";
 export default {
+  // 3. 注册 mixin
+  mixins: [MescrollMixin],
   data() {
     return {
       // 数据源
       videoList: [],
       size: 10,
       page: 1,
+      // 是否为 init
+      isInit: true,
+      // 实例
+      mescroll: null,
     };
   },
   created() {
-    this.loadHotVideoList();
+    // this.loadHotVideoList();
+    uni.showModal({
+      title: "提示",
+      content: "因浏览器对视频解析问题，具体呈现效果可能会存在差异! ",
+    });
+  },
+  mounted() {
+    this.mescroll = this.$refs.mescrollRef.mescroll;
   },
   methods: {
     /**
@@ -34,11 +57,42 @@ export default {
         page: this.page,
         size: this.size,
       });
-      this.videoList = res.list;
-      console.log(
-        "🚀 ~ file: hot-video.vue ~ line 34 ~ loadHotVideoList ~ this.videoList",
-        this.videoList
-      );
+      // 判断是否为第一页数据
+      if (this.page === 1) {
+        this.videoList = res.list;
+      } else {
+        this.videoList = [...this.videoList, ...res.list];
+      }
+    },
+    // 4. 实现回调方法
+    /**
+     * List 组件的首次加载
+     */
+    async mescrollInit() {
+      await this.loadHotVideoList();
+      this.isInit = false;
+      // 结束 上拉加载 && 下拉刷新
+      this.mescroll.endSuccess();
+    },
+    /**
+     * 下拉刷新的回调
+     */
+    async downCallback() {
+      if (this.isInit) return;
+      this.page = 1;
+      await this.loadHotVideoList();
+      // 结束 上拉加载 && 下拉刷新
+      this.mescroll.endSuccess();
+    },
+    /**
+     * 上拉加载的回调
+     */
+    async upCallback() {
+      if (this.isInit) return;
+      this.page += 1;
+      await this.loadHotVideoList();
+      // 结束 上拉加载 && 下拉刷新
+      this.mescroll.endSuccess();
     },
   },
 };
