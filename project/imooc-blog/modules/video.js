@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-29 20:47:02
- * @LastEditTime: 2021-12-29 23:36:29
+ * @LastEditTime: 2021-12-30 18:38:52
  * @FilePath: \imooc-blog\modules\video.js
  */
 export default {

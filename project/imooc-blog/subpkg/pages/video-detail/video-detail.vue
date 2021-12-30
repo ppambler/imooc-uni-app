@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 18:12:31
+ * @LastEditTime: 2021-12-30 19:06:12
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -38,7 +38,11 @@
       />
       <!-- 输入弹幕的popup -->
       <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
-        <article-comment-commit v-if="isShowCommit" />
+        <article-comment-commit
+          v-if="isShowCommit"
+          :articleId="videoData.id"
+          @success="onSendDanmu"
+        />
       </uni-popup>
     </view>
   </view>
@@ -54,10 +58,20 @@ export default {
       danmuList: [],
       // 输入框是否显示
       isShowCommit: false,
+      // video 组件上下文
+      videoContext: null,
     };
   },
   computed: {
     ...mapState("video", ["videoData"]),
+  },
+  onReady: function (res) {
+    // 获取 video 组件上下文
+    this.videoContext = uni.createVideoContext("myVideo");
+    console.log(
+      "🚀 ~ file: video-detail.vue ~ line 71 ~ this.videoContext",
+      this.videoContext
+    );
   },
   created() {
     this.loadVideoDanmuList();
@@ -95,6 +109,34 @@ export default {
           this.isShowCommit = e.show;
         }, 200);
       }
+    },
+    /**
+     * 弹幕发布成功之后的回调
+     */
+    onSendDanmu(data) {
+      console.log(
+        "🚀 ~ file: video-detail.vue ~ line 113 ~ onSendDanmu ~ data",
+        data
+      );
+      console.log(
+        "🚀 ~ file: video-detail.vue ~ line 126 ~ onSendDanmu ~ this.videoContext",
+        this.videoContext
+      );
+      // 发送弹幕
+      this.videoContext.sendDanmu({
+        text: data.info.content,
+        color: "#00ff00",
+      });
+      // 添加弹幕到数据源
+      this.danmuList.unshift(data.info);
+      // 关闭 pop
+      this.$refs.popup.close();
+      // 关闭标记
+      this.isShowCommit = false;
+      // 提示用户
+      uni.showToast({
+        title: "发表成功",
+      });
     },
   },
 };
