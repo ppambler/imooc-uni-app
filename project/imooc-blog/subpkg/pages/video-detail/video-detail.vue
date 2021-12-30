@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 19:17:54
+ * @LastEditTime: 2021-12-30 20:21:34
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -51,6 +51,7 @@
 <script>
 import { mapState } from "vuex";
 import { getVideoDanmuList } from "@/api/video";
+import { getRandomColor } from "@/utils/index.js";
 export default {
   data() {
     return {
@@ -86,6 +87,10 @@ export default {
       const { data: res } = await getVideoDanmuList({
         videoId: this.videoData.id,
       });
+      // 定义随机颜色
+      res.list.forEach((item) => {
+        item.color = getRandomColor();
+      });
       this.danmuList = [...res.list];
       this.commentList = [...res.list];
     },
@@ -116,7 +121,7 @@ export default {
       // 发送弹幕
       this.videoContext.sendDanmu({
         text: data.info.content,
-        color: "#00ff00",
+        color: getRandomColor(),
       });
       // 添加弹幕到评论数据源
       this.commentList.unshift(data.info);

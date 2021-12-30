@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-20 20:28:52
- * @LastEditTime: 2021-12-20 20:31:47
+ * @LastEditTime: 2021-12-30 20:18:08
  * @FilePath: \imooc-blog\utils\index.js
  */
 
@@ -41,5 +41,18 @@ function debounce(fn, interval) {
     }, gapTime);
   };
 }
+
+/**
+ * 返回随机色值
+ */
+export let getRandomColor = () => {
+  const rgb = [];
+  for (let i = 0; i < 3; ++i) {
+    let color = Math.floor(Math.random() * 256).toString(16);
+    color = color.length == 1 ? "0" + color : color;
+    rgb.push(color);
+  }
+  return "#" + rgb.join("");
+};
 
 export { throttle, debounce };
