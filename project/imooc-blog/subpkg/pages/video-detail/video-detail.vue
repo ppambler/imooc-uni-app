@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-29 23:44:20
+ * @LastEditTime: 2021-12-30 18:12:31
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -31,6 +31,15 @@
           </view>
         </view>
       </view>
+      <!-- 底部功能区 -->
+      <article-operate
+        @commitClick="onCommit"
+        :placeholder="'发个弹幕，开心一下'"
+      />
+      <!-- 输入弹幕的popup -->
+      <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
+        <article-comment-commit v-if="isShowCommit" />
+      </uni-popup>
     </view>
   </view>
 </template>
@@ -43,6 +52,8 @@ export default {
     return {
       // 弹幕数据源
       danmuList: [],
+      // 输入框是否显示
+      isShowCommit: false,
     };
   },
   computed: {
@@ -64,6 +75,26 @@ export default {
         "🚀 ~ file: video-detail.vue ~ line 50 ~ loadVideoDanmuList ~ this.danmuList",
         this.danmuList
       );
+    },
+    /**
+     * 发布弹幕点击事件
+     */
+    onCommit() {
+      // 通过组件定义的ref调用uni-popup方法
+      this.$refs.popup.open();
+    },
+    /**
+     * 发布弹幕的 popup 切换事件
+     */
+    onCommitPopupChange(e) {
+      // 修改对应的标记，当 popup 关闭时，为了动画平顺，进行延迟处理
+      if (e.show) {
+        this.isShowCommit = e.show;
+      } else {
+        setTimeout(() => {
+          this.isShowCommit = e.show;
+        }, 200);
+      }
     },
   },
 };

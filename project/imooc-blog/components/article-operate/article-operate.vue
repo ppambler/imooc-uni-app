@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-29 01:49:01
+ * @LastEditTime: 2021-12-30 17:59:04
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
@@ -8,7 +8,7 @@
     <!-- 输入框 -->
     <view class="comment-box" @click="onCommitClick">
       <my-search
-        placeholderText="评论一句，前排打 call..."
+        :placeholderText="placeholder"
         :config="{
           height: 28,
           backgroundColor: '#eeedf4',
@@ -43,6 +43,10 @@ export default {
     articleData: {
       type: Object,
       // required: true,
+    },
+    placeholder: {
+      type: String,
+      default: "评论一句，前排打 call...",
     },
   },
   data() {
