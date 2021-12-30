@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 20:52:15
+ * @LastEditTime: 2021-12-30 23:21:52
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -37,8 +37,12 @@
       </view>
       <!-- 底部功能区 -->
       <article-operate
-        @commitClick="onCommit"
+        type="video"
+        :articleData="videoData"
         :placeholder="'发个弹幕，开心一下'"
+        @commitClick="onCommit"
+        @changePraise="onChangePraise"
+        @changeCollect="onChangeCollect"
       />
       <!-- 输入弹幕的popup -->
       <uni-popup ref="popup" type="bottom" @change="onCommitPopupChange">
@@ -53,7 +57,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import { getVideoDanmuList } from "@/api/video";
 import { getRandomColor } from "@/utils/index.js";
 export default {
@@ -86,6 +90,7 @@ export default {
     this.loadVideoDanmuList();
   },
   methods: {
+    ...mapMutations("video", ["setVideoData"]),
     /**
      * 获取弹幕数据
      */
@@ -140,6 +145,18 @@ export default {
       uni.showToast({
         title: "发表成功",
       });
+    },
+    /**
+     * 点赞处理回调
+     */
+    onChangePraise(isPraise) {
+      this.setVideoData({ ...this.videoData, isPraise });
+    },
+    /**
+     * 收藏处理回调
+     */
+    onChangeCollect(isCollect) {
+      this.setVideoData({ ...this.videoData, isCollect });
     },
   },
 };

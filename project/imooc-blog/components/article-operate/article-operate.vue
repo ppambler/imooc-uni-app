@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-26 21:37:28
- * @LastEditTime: 2021-12-30 17:59:04
+ * @LastEditTime: 2021-12-30 23:22:53
  * @FilePath: \imooc-blog\components\article-operate\article-operate.vue
 -->
 <template>
@@ -21,14 +21,14 @@
     <!-- 点赞 -->
     <view class="options-box">
       <article-praise
-        :articleData="articleData"
+        :articleData="getData"
         @changePraise="$emit('changePraise', $event)"
       />
     </view>
     <!-- 收藏 -->
     <view class="options-box">
       <article-collect
-        :articleData="articleData"
+        :articleData="getData"
         @changeCollect="$emit('changeCollect', $event)"
       />
     </view>
@@ -48,9 +48,21 @@ export default {
       type: String,
       default: "评论一句，前排打 call...",
     },
+    type: {
+      type: String,
+      default: "article",
+    },
   },
   data() {
     return {};
+  },
+  computed: {
+    getData() {
+      if (this.type === "video") {
+        this.articleData.articleId = this.articleData.id;
+      }
+      return this.articleData;
+    },
   },
   methods: {
     ...mapActions("user", ["isLogin"]),
