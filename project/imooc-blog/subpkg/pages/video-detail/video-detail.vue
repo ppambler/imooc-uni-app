@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 19:06:12
+ * @LastEditTime: 2021-12-30 19:17:54
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -25,7 +25,7 @@
         <view class="comment-container">
           <view class="all-comment-title">全部弹幕</view>
           <view class="list">
-            <block v-for="(item, index) in danmuList" :key="index">
+            <block v-for="(item, index) in commentList" :key="index">
               <article-comment-item :data="item" />
             </block>
           </view>
@@ -56,6 +56,8 @@ export default {
     return {
       // 弹幕数据源
       danmuList: [],
+      // 评论列表数据源
+      commentList: [],
       // 输入框是否显示
       isShowCommit: false,
       // video 组件上下文
@@ -84,11 +86,8 @@ export default {
       const { data: res } = await getVideoDanmuList({
         videoId: this.videoData.id,
       });
-      this.danmuList = res.list;
-      console.log(
-        "🚀 ~ file: video-detail.vue ~ line 50 ~ loadVideoDanmuList ~ this.danmuList",
-        this.danmuList
-      );
+      this.danmuList = [...res.list];
+      this.commentList = [...res.list];
     },
     /**
      * 发布弹幕点击事件
@@ -114,21 +113,13 @@ export default {
      * 弹幕发布成功之后的回调
      */
     onSendDanmu(data) {
-      console.log(
-        "🚀 ~ file: video-detail.vue ~ line 113 ~ onSendDanmu ~ data",
-        data
-      );
-      console.log(
-        "🚀 ~ file: video-detail.vue ~ line 126 ~ onSendDanmu ~ this.videoContext",
-        this.videoContext
-      );
       // 发送弹幕
       this.videoContext.sendDanmu({
         text: data.info.content,
         color: "#00ff00",
       });
-      // 添加弹幕到数据源
-      this.danmuList.unshift(data.info);
+      // 添加弹幕到评论数据源
+      this.commentList.unshift(data.info);
       // 关闭 pop
       this.$refs.popup.close();
       // 关闭标记
