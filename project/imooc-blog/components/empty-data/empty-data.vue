@@ -1,3 +1,8 @@
+<!--
+ * @Date: 2021-12-25 00:26:59
+ * @LastEditTime: 2021-12-30 22:06:43
+ * @FilePath: \imooc-blog\components\empty-data\empty-data.vue
+-->
 <template>
   <view class="empty-data-cocntainer">
     <image src="@/static/images/empty-data.png" class="img" />
@@ -19,7 +24,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 35%;
+  padding-top: 15%;
+
   .img {
     width: 64px;
     height: 64px;

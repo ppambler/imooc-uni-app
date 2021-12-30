@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 20:21:34
+ * @LastEditTime: 2021-12-30 20:52:15
  * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
@@ -21,8 +21,12 @@
       </view>
       <!-- 弹幕模块 -->
       <view class="danmu-box">
+        <!-- 加载动画 -->
+        <uni-load-more status="loading" v-if="isLoadingComment"></uni-load-more>
+        <!-- 无弹幕 -->
+        <empty-data v-else-if="commentList.length === 0"></empty-data>
         <!-- 弹幕列表 -->
-        <view class="comment-container">
+        <view class="comment-container" v-else>
           <view class="all-comment-title">全部弹幕</view>
           <view class="list">
             <block v-for="(item, index) in commentList" :key="index">
@@ -63,6 +67,8 @@ export default {
       isShowCommit: false,
       // video 组件上下文
       videoContext: null,
+      // 弹幕列表数据加载中
+      isLoadingComment: true,
     };
   },
   computed: {
@@ -93,6 +99,7 @@ export default {
       });
       this.danmuList = [...res.list];
       this.commentList = [...res.list];
+      this.isLoadingComment = false;
     },
     /**
      * 发布弹幕点击事件
