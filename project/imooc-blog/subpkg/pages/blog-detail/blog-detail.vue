@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2022-01-01 01:24:18
+ * @LastEditTime: 2022-01-01 01:52:33
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
@@ -48,7 +48,7 @@
         />
         <!-- <rich-text :nodes="articleData.content"></rich-text> -->
         <!-- 评论列表 -->
-        <view class="comment-box">
+        <view class="comment-box" v-if="timeout">
           <!-- 1. 给 mescroll-body 的组件添加：ref="mescrollItem"（mescrollItem 是固定的不可以变化） -->
           <article-comment-list
             ref="mescrollItem"
@@ -104,6 +104,7 @@ export default {
       isFollowLoading: false,
       // popup 的显示状态
       isShowCommit: false,
+      timeout: false,
     };
   },
   onLoad(options) {
@@ -126,6 +127,9 @@ export default {
         articleId: this.articleId,
       });
       this.articleData = res.data;
+      setTimeout(() => {
+        this.timeout = true;
+      }, 3000);
       console.log(
         "🚀 ~ file: blog-detail.vue ~ line 41 ~ loadArticleDetail ~ this.articleData",
         this.articleData
