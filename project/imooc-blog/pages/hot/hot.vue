@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-31 17:59:32
+ * @LastEditTime: 2021-12-31 21:52:29
  * @FilePath: \imooc-blog\pages\hot\hot.vue
 -->
 <template>
@@ -182,7 +182,10 @@ export default {
         }
       }, 300);
 
-      this.currentIndex = e.detail.current;
+      // 解决官方 swiper 在 change 里改变 current 值无限左右抖动的 bug
+      if (e.detail.source === "touch") {
+        this.currentIndex = e.detail.current;
+      }
     },
     /**
      * @description: 搜索框点击事件

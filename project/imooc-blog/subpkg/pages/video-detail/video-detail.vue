@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-12-29 20:03:38
- * @LastEditTime: 2021-12-30 23:21:52
- * @FilePath: \imooc-blog\subpkg\pages\video-detail\video-detail.vue
+ * @LastEditTime: 2021-12-31 22:31:39
+ * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\subpkg\pages\video-detail\video-detail.vue
 -->
 <template>
   <view>
@@ -179,6 +179,7 @@ export default {
     margin-bottom: 36px;
     .comment-container {
       padding: $uni-spacing-col-lg $uni-spacing-row-lg;
+      padding-bottom: 48px;
       .all-comment-title {
         font-size: $uni-font-size-lg;
         font-weight: bold;
