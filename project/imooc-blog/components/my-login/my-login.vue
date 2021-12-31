@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-27 21:21:35
- * @LastEditTime: 2021-12-28 18:53:56
+ * @LastEditTime: 2021-12-31 19:35:17
  * @FilePath: \imooc-blog\components\my-login\my-login.vue
 -->
 <template>
@@ -13,9 +13,16 @@
         mode="scaleToFill"
       />
       <view class="login-desc">登录后可同步数据</view>
+      <!-- #ifdef MP-WEIXIN -->
       <button class="login-btn" type="primary" @click="getUserInfo">
         微信用户一键登录
       </button>
+      <!-- #endif -->
+      <!-- #ifndef MP-WEIXIN -->
+      <button class="login-btn" type="primary" @click="onAutoLogin">
+        一键登录
+      </button>
+      <!-- #endif -->
     </block>
     <!-- 已登录 -->
     <block v-else>
@@ -90,6 +97,33 @@ export default {
           }
         },
       });
+    },
+    /**
+     * 一键登录
+     */
+    async onAutoLogin() {
+      // 展示加载框
+      uni.showLoading({
+        title: "加载中",
+      });
+      await this.login({
+        encryptedData: "BmGEMqpGI5w",
+        errMsg: "getUserProfile:ok",
+        iv: "c+NbINO4CuEWCBYGG2FxWw==",
+        rawData:
+          '{"nickName":"小慕同学","gender":1,"language":"zh_CN","city":"","province":"","country":"China","avatarUrl":"https://m.imooc.com/static/wap/static/common/img/logo-small@2x.png"}',
+        signature: "449a10f11998daf680fe546a5176e6e2973516ce",
+        userInfo: {
+          nickName: "小慕同学",
+          gender: 1,
+          language: "zh_CN",
+          city: "",
+          province: "",
+        },
+      });
+      this.$emit("onLoginSuccess");
+      // 隐藏loading
+      uni.hideLoading();
     },
   },
 };
