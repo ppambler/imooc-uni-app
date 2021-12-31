@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-12-16 17:16:13
- * @LastEditTime: 2021-12-25 15:19:31
- * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\pages\hot\hot.vue
+ * @LastEditTime: 2021-12-31 17:59:32
+ * @FilePath: \imooc-blog\pages\hot\hot.vue
 -->
 <template>
   <view class="hot-container">
@@ -224,7 +224,12 @@ export default {
     position: -webkit-sticky;
     position: sticky;
     z-index: 99;
+    /* #ifndef H5 */
     top: 0;
+    /* #endif */
+    /* #ifdef H5 */
+    top: 44px;
+    /* #endif */
   }
   /* scroll-behavior: smooth; */
 }
