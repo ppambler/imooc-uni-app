@@ -1,10 +1,12 @@
 <!--
  * @Date: 2021-12-25 14:04:11
- * @LastEditTime: 2021-12-29 01:49:39
+ * @LastEditTime: 2021-12-31 18:25:14
  * @FilePath: \imooc-blog\subpkg\pages\blog-detail\blog-detail.vue
 -->
 <template>
+  <!-- #ifndef H5 -->
   <page-meta root-font-size="52px">
+    <!-- #endif -->
     <view class="detail-container">
       <!-- 文章内容区域 -->
       <block v-if="articleData">
@@ -70,7 +72,9 @@
         />
       </uni-popup>
     </view>
+    <!-- #ifndef H5 -->
   </page-meta>
+  <!-- #endif -->
 </template>
 
 <script>

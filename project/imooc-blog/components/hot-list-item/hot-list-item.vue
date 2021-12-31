@@ -1,6 +1,6 @@
 <!--
  * @Date: 2021-12-18 15:48:17
- * @LastEditTime: 2021-12-25 14:18:40
+ * @LastEditTime: 2021-12-31 18:34:06
  * @FilePath: \imooc-blog\components\hot-list-item\hot-list-item.vue
 -->
 <template>
@@ -93,7 +93,12 @@ export default {
           .hot-icon {
             width: $uni-img-size-sm;
             height: $uni-img-size-sm;
+            /* #ifndef H5 */
             vertical-align: bottom;
+            /* #endif */
+            /* #ifdef H5 */
+            vertical-align: middle;
+            /* #endif */
           }
           .hot-text {
             margin-left: $uni-spacing-row-sm;
