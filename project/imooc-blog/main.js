@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-15 18:57:48
- * @LastEditTime: 2021-12-23 16:51:55
+ * @LastEditTime: 2021-12-31 18:58:45
  * @FilePath: \imooc-blog\main.js
  */
 // #ifndef VUE3
@@ -12,6 +12,9 @@ import store from "@/store";
 
 // 通用样式
 import "./styles/global.scss";
+
+// 文章详情样式
+import "./styles/article-detail.scss";
 
 // 注册过滤器的最佳实践
 import * as filters from "./filters";
