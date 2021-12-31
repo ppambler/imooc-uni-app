@@ -1,7 +1,7 @@
 <!--
  * @Date: 2021-12-17 11:15:21
- * @LastEditTime: 2021-12-20 19:24:25
- * @FilePath: \imooc-blog\components\my-tabs\my-tabs.vue
+ * @LastEditTime: 2021-12-31 18:08:43
+ * @FilePath: \imooc-bloge:\BlogDemo\imooc-uni-app\project\imooc-blog\components\my-tabs\my-tabs.vue
 -->
 <template>
   <!--  处理 my-tabs 的 html 结构-->
@@ -284,4 +284,13 @@ export default {
     }
   }
 }
+/* #ifdef H5 */
+/deep/.uni-scroll-view::-webkit-scrollbar {
+  display: none;
+}
+
+/deep/.uni-scroll-view {
+  scrollbar-width: none;
+}
+/* #endif */
 </style>
