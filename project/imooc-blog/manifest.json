@@ -60,6 +60,9 @@
         "usingComponents" : true
     },
     "h5" : {
-        "template" : "index.html"
+        "template" : "index.html",
+        "router" : {
+            "base" : "/imooc-uni-app/"
+        }
     }
 }
