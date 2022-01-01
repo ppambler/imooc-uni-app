@@ -53,7 +53,7 @@
         "setting" : {
             "urlCheck" : false,
             "checkSiteMap" : false,
-            "minified" : false,
+            "minified" : true,
             "postcss" : false,
             "es6" : false
         },
